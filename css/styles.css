@@ -1,0 +1,48 @@
+.navbar {
+    background-color: #0077b6;
+  }
+  
+  .navbar .navbar-brand {
+    color: #fff;
+  }
+  
+  .navbar .nav-link {
+    color: #fff;
+  }
+
+
+.fc-toolbar-title{
+  color: #0077b6;
+}
+
+.fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+  color: #fff;
+}
+
+.fc .fc-col-header-cell{
+  background-color: #0077b6;
+  border-color: #0077b6;
+}
+
+.fc .fc-button{
+  color: #0077b6;
+  background-color: #fff;
+  border-color: #0077b6;
+}
+
+
+:root{
+  --fc-today-bg-color: #CAF0F8; /* cambia el color de la casilla del dia actual */
+  --fc-button-bg-color: #0077b6;
+}
+
+.btn-primary{
+  background-color: #00B4D8;
+}
+
+/* Tipografia */
+.h2{
+  color: #03045E;
+}
