@@ -10,7 +10,7 @@
     color: #fff;
   }
 
-
+/* Calendar */
 .fc-toolbar-title{
   color: #0077b6;
 }
@@ -33,6 +33,8 @@
 }
 
 
+
+
 :root{
   --fc-today-bg-color: #CAF0F8; /* cambia el color de la casilla del dia actual */
   --fc-button-bg-color: #0077b6;
@@ -40,9 +42,31 @@
 
 .btn-primary{
   background-color: #00B4D8;
+  border: none;
+}
+
+/* Barra de busqueda */
+.custom-search{
+  width: 250px;
+}
+
+.custom-imput{
+  background-color: #CAF0F8;
+  border-radius: 5px;
+  border: none;
+}
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 /* Tipografia */
 .h2{
   color: #03045E;
+}
+
+/* Tabla */
+.thead{
+  color: #8B8989;
 }
