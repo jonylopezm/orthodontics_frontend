@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,11 +58,205 @@
             </ul>
           </div>
         </nav>
+<h2>
 
+        <div class="form-group">
+            <label id="fecha" for="fecha">Hoy es</label>
+        </div>
+  
+</h2>
+    
         <!--  Tabla de Datos -->
-
+       
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div  class="table">
+    <table class="table">
+        <thead class="table-primary">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Asistencia</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Actualizar</th>
+            <th scope="col">Detalles</th>
 
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">33254</th>
+            <td>Andrea Patricia Alvarado</td>
+            
+            <td>
+                <span class="material-icons">
+                check_circle
+                </span>
+            </td>
+            <td>10:00</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+       <div class = "mt-4">
+           <h3> Listado de faltas </h3>
+           <table class="table">
+               <thead class="table-primary">
+               <tr>
+                   <th scope="col">ID</th>
+                   <th scope="col">Paciente</th>
+                   <th scope="col">Asistencia</th>
+                   <th scope="col">Hora</th>
+                   <th scope="col">Actualizar</th>
+                   <th scope="col">Detalles</th>
+
+               </tr>
+               </thead>
+               <tbody>
+               <tr>
+                   <th scope="row">52464</th>
+                   <td>Julian Omar Valenzuela</td>
+                   <td>
+                <span class="material-icons">
+                cancel
+                </span>
+                   </td>
+                   <td>13:30</td>
+                   <td>
+                <span class="material-icons">
+                edit
+                </span>
+                   </td>
+                   <td>
+                <span class="material-icons">
+                info
+                </span>
+                   </td>
+               </tr>
+               <tr>
+               </tbody>
+           </table>
+
+       </div> 
 </body>
+<script>
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('es-ES', options);
+    const fecha = document.getElementById("fecha")
+    fecha.innerHTML= `${fecha.textContent} ${formattedDate}`
+</script>
 </html>
