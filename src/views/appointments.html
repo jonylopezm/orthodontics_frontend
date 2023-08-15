@@ -1,40 +1,229 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="orthodontics" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="\css\styles.css">
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-    <script src="/js/calendar.js"></script>
+    <script src="/js/calendario.js"></script>
 
     <title>Orthodontics</title>
-  </head>
-  <body>
-    <!-- Muestra el navbar -->
-    <div id="navbar-container"></div>
+</head>
+<body>
+       <!--  Barra de navegación -->
+       <div id="navbar-container"></div>
+<h2>
 
-    <!-- Script para traer el componente navbar.html -->
-    <script>
-        fetch('/components/navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar-container').innerHTML = data;
-        })
-        .catch(error => console.error('Error al cargar el Navbar:', error));
-    </script>
-    <h3>Citas</h3>
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+        <div class="form-group">
+            <label id="fecha" for="fecha">Hoy es</label>
+        </div>
+  
+</h2>
+    
+        <!--  Tabla de Datos -->
+       
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div  class="table">
+    <table class="table">
+        <thead class="table-primary">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Asistencia</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Actualizar</th>
+            <th scope="col">Detalles</th>
 
-  </body>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">33254</th>
+            <td>Andrea Patricia Alvarado</td>
+            
+            <td>
+                <span class="material-icons">
+                check_circle
+                </span>
+            </td>
+            <td>10:00</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">52464</th>
+            <td>Juan Carlos Santana</td>
+            <td>
+                <span class="material-icons">
+                schedule
+                </span>
+            </td>
+            <td>13:30</td>
+            <td>
+                <span class="material-icons">
+                edit
+                </span>
+            </td>
+            <td>
+                <span class="material-icons">
+                info
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+       <div class = "mt-4">
+           <h3> Listado de faltas </h3>
+           <table class="table">
+               <thead class="table-primary">
+               <tr>
+                   <th scope="col">ID</th>
+                   <th scope="col">Paciente</th>
+                   <th scope="col">Asistencia</th>
+                   <th scope="col">Hora</th>
+                   <th scope="col">Actualizar</th>
+                   <th scope="col">Detalles</th>
+
+               </tr>
+               </thead>
+               <tbody>
+               <tr>
+                   <th scope="row">52464</th>
+                   <td>Julian Omar Valenzuela</td>
+                   <td>
+                <span class="material-icons">
+                cancel
+                </span>
+                   </td>
+                   <td>13:30</td>
+                   <td>
+                <span class="material-icons">
+                edit
+                </span>
+                   </td>
+                   <td>
+                <span class="material-icons">
+                info
+                </span>
+                   </td>
+               </tr>
+               <tr>
+               </tbody>
+           </table>
+
+       </div> 
+</body>
+<script>
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('es-ES', options);
+    const fecha = document.getElementById("fecha")
+    fecha.innerHTML= `${fecha.textContent} ${formattedDate}`
+</script>
+
+<!-- llamar el componente navbar -->
+<script>
+    fetch('/components/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el Navbar:', error));
+</script>
 </html>
