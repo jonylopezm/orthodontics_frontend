@@ -65,7 +65,7 @@
 /* color del Boton del calendario */
 :root{
   --fc-today-bg-color: #CAF0F8; /* cambia el color de la casilla del dia actual */
-  --fc-button-bg-color: #0077b6;
+  --fc-button-bg-color: #0077b6; 
 }
 
 .btn-primary{

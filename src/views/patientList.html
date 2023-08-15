@@ -45,18 +45,12 @@
                             Detalles
                         </button>
 
-                        <div id="modalContainer"></div>
+                        <div id="patientDetail"></div>
 
                         <script>
                           document.getElementById('loadModalBtn').addEventListener('click', function() {
-                          fetch('/components/modalPatient.html')
-                          .then(response => response.text())
-                          .then(content => {
-                          document.getElementById('modalContainer').innerHTML = content;
-                          const modal = new bootstrap.Modal(document.getElementById('myModal'));
-                          modal.show();
-                              });
-                          });
+                          window.location.href = "/src/views/patientDetails.html";
+                              });                        
                         </script>
                     </td>
                 </tr>
