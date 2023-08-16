@@ -9,52 +9,69 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="\css\styles.css">
     
+    <!-- fuente -->
+
     <title>Orthodontics</title>
   </head>
   <body>
    <!--  Barra de navegación -->
-   <nav class="navbar navbar-expand-lg">
+   <nav class="navbar navbar-expand-lg navbar-dark">
        
     <!-- Logo -->
     <a class="navbar-brand" href="#">
          <img src="\img\logo.png" width="150" height="40" class="d-inline-block align-top" alt="">
-      </a>
+    </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <!-- Menu de ventanas del sistema -->
-      
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+       
         <ul class="navbar-nav">
         
           <li class="nav-item active">
-              <a class="nav-link" href="/src/views/inicio.html">Agenda de Citas <span class="sr-only">(current)</span></a>
-            </li>
+              <a class="nav-link" href="/src/views/homepage.html">Calendario<span class="sr-only">(current)</span></a>
+          </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                 Citas
               </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Nueva Cita</a>
-                <a class="dropdown-item" href="#">Todas las Citas</a>
-                <a class="dropdown-item" href="#">Calendario de citas</a>
-                <a class="dropdown-item" href="#">Citas del dia</a>
+              <div class="dropdown-menu custom-dropdown">
+                <a class="dropdown-item" href="/src/views/newAppointment.html">Nueva Cita</a>
+                <a class="dropdown-item" href="/src/views/appointments.html">Citas del dia</a>
               </div>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                 Pacientes
               </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Pacientes</a>
-                <a class="dropdown-item" href="/src/views/agegarPaciente.html">Nuevo Paciente</a>
+              <div class="dropdown-menu custom-dropdown">
+                <a class="dropdown-item" href="/src/views/patientList.html">Pacientes</a>
+                <a class="dropdown-item" href="/src/views/addPatient.html">Nuevo Paciente</a>
               </div>
             </li>
         </ul>
-      </div>
+       </div>     
+
+       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown dropdown-user">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Usuario
+                  <img src="/img/user.jpg" alt="UserPhoto" class="rounded-circle user-avatar">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right custom-dropdown" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">Ver Perfil</a>
+                    <a class="dropdown-item" href="/src/views/addUser.html">Nuevo Usuario</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </div>
     </nav>
 
     <!-- Optional JavaScript; choose one of the two! -->

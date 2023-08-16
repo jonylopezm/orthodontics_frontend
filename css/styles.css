@@ -10,7 +10,7 @@
     color: #fff;
   }
 
-
+/* Calendar */
 .fc-toolbar-title{
   color: #0077b6;
 }
@@ -32,17 +32,69 @@
   border-color: #0077b6;
 }
 
+/* estilos del dropdown menu de usuario en navbar */
+.dropdown-user .dropdown-toggle::after {
+  content: none; /* Elimina la flecha por defecto del enlace */
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+}
+.dropdown-user .dropdown-item {
+  color: #606060;
+}
 
+.custom-dropdown {
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: none;
+  box-shadow: 0 4px 8px rgba(1, 72, 100, 0.178);
+}
+.custom-dropdown .dropdown-divider {
+  margin: 0.5rem 0;
+  border-color: #0076b631;
+}
+.custom-dropdown .dropdown-item {
+  color: #333;
+}
+.custom-dropdown .dropdown-item:hover {
+  background-color: #CAF0F8;
+}
+
+/* color del Boton del calendario */
 :root{
   --fc-today-bg-color: #CAF0F8; /* cambia el color de la casilla del dia actual */
-  --fc-button-bg-color: #0077b6;
+  --fc-button-bg-color: #0077b6; 
 }
 
 .btn-primary{
   background-color: #00B4D8;
+  border: none;
+}
+
+/* Barra de busqueda */
+.custom-search{
+  width: 250px;
+}
+
+.custom-imput{
+  background-color: #CAF0F8;
+  border-radius: 5px;
+  border: none;
+}
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 /* Tipografia */
 .h2{
   color: #03045E;
+}
+
+/* Tabla */
+.thead{
+  color: #8B8989;
 }
