@@ -15,7 +15,8 @@
     <div id="navbar-container"></div>
 
     <div class="container mt-5">
-
+        
+        <h2 class="mb-4 h2">Pacientes</h2>
         <!-- Barra de búsqueda -->
         <div class="search-container">
             <div class="input-group mb-3 custom-search">
@@ -24,6 +25,8 @@
             </div>
         </div>
       
+        <!-- Tabla de datos -->
+
         <table class="table table-sm table-hover">
             <thead class="thead">
                 <tr class="table-light">
@@ -41,44 +44,69 @@
                     <td>0401-1987-12345</td>
                     <td>9374-5678</td>
                     <td>
-                        <button type="button" class="btn btn-primary" id="loadModalBtn">
+                        <button type="button" class="btn btn-primary" id="1">
                             Detalles
                         </button>
-
-                        <div id="patientDetail"></div>
-
+                        <!-- redirige a pagina de detalles de paciente -->
                         <script>
-                          document.getElementById('loadModalBtn').addEventListener('click', function() {
+                          document.getElementById('1').addEventListener('click', function() {
                           window.location.href = "/src/views/patientDetails.html";
                               });                        
                         </script>
                     </td>
                 </tr>
                 <tr>
-                    <td>p1234</td>
-                    <td>Maria Rodriguez</td>
+                    <td>p78545</td>
+                    <td>Ramon Argueta</td>
                     <td>0401-1995-23456</td>
                     <td>9345-6789</td>
                     <td>
-                        <button type="button" class="btn btn-primary" id="loadModalBtn2">
+                        <button type="button" class="btn btn-primary" id="2">
                             Detalles
                         </button>
-
-                        <div id="modalContainer2"></div>
-
                         <script>
-                          document.getElementById('loadModalBtn2').addEventListener('click', function() {
-                          fetch('/components/modalPatient.html')
-                          .then(response => response.text())
-                          .then(content => {
-                          document.getElementById('modalContainer2').innerHTML = content;
-                          const modal = new bootstrap.Modal(document.getElementById('myModal'));
-                          modal.show();
-                              });
-                          });
+                          document.getElementById('2').addEventListener('click', function() {
+                          window.location.href = "/src/views/patientDetails.html";
+                              });                        
                         </script>
                     </td>
                 </tr>
+                <tr>
+                    <td>p4321</td>
+                    <td>Maria Rodriguez</td>
+                    <td>0401-1997-02456</td>
+                    <td>9374-5678</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" id="1">
+                            Detalles
+                        </button>
+                        <!-- redirige a pagina de detalles de paciente -->
+                        <script>
+                          document.getElementById('1').addEventListener('click', function() {
+                          window.location.href = "/src/views/patientDetails.html";
+                              });                        
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>p0412</td>
+                    <td>Ernesto Alvarado</td>
+                    <td>0401-1999-00125</td>
+                    <td>9374-5678</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" id="1">
+                            Detalles
+                        </button>
+                        <!-- redirige a pagina de detalles de paciente -->
+                        <script>
+                          document.getElementById('1').addEventListener('click', function() {
+                          window.location.href = "/src/views/patientDetails.html";
+                              });                        
+                        </script>
+                    </td>
+                </tr>
+
+
             
             </tbody>
         </table>
