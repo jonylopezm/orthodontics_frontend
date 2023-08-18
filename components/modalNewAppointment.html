@@ -1,4 +1,4 @@
-<div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -61,4 +61,37 @@
                 </div>
             </div>
         </div>
+</div> -->
+
+<!-- Modal de Confirmacion -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmar Nueva Cita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Desea crear una nueva cita para la fecha:
+                <span id="confirmationDate"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmButton">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+        const seleccionarPacienteBtn = document.getElementById('seleccionarPaciente');
+        const pacienteModal = new bootstrap.Modal(document.getElementById('pacienteModal'));
+
+        seleccionarPacienteBtn.addEventListener('click', function() {
+            pacienteModal.show(); // Mostrar el modal anidado al hacer clic en el botón
+        });
+    });
+</script>

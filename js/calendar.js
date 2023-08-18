@@ -85,14 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.text())
     .then(content => {
         document.getElementById('modalContainer').innerHTML = content;
-        const modal = new bootstrap.Modal(document.getElementById('newAppointmentModal'));
+        const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
         modal.show();
 
        // Formatear la fecha para el input tipo date (YYYY-MM-DD)
        const formattedDate = formatDateForInput(date);
-       document.getElementById('appointmentDate').value = formattedDate;
-    });
+       document.getElementById('confirmationDate').textContent = formattedDate;
+
+      // Redirigir a la página newAppointment.html con el parámetro de consulta
+      const confirmButton = document.getElementById('confirmButton');
+      confirmButton.addEventListener('click', function() {
+          // Redirigir a la página newAppointment.html con el parámetro de consulta
+          window.location.href = `/src/views/newAppointment.html?date=${formattedDate}`;
+      });      });
   }
+
 
   function formatDateForInput(date) {
     const year = date.substring(0, 4);

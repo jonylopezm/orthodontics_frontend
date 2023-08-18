@@ -51,9 +51,9 @@
               </div>  
               
               <div class="col-md-6 mt-4">
-                  <button type="button" class="btn btn-primary" id="seleccionarPaciente">Seleccionar</button>
-                  <button type="button" class="btn btn-primary" id="crearNuevoPaciente">Nuevo</button>
+                  <button type="button" class="btn btn-primary" id="seleccionarPaciente">Seleccionar Paciente</button>
               </div>
+              <div id="modalContainer"></div>
           </div>
       
           <div class="row mt-3">
@@ -82,6 +82,46 @@
           </div>
       </form>
     </div>
+
+    <!-- Este script trae la fecha a la que se hizo click en el calendario -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el valor del parámetro de consulta 'date'
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedDate = urlParams.get('date');
+
+    // Establecer el valor del campo de entrada de fecha
+    if (selectedDate) {
+        document.getElementById('fecha').value = selectedDate;
+    }
+    });
+    </script>
+
+    <!-- Script para cargar el modal lista de pacientes en el div modalContainer -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const openModalButton = document.getElementById('seleccionarPaciente');
+        const modalContainer = document.getElementById('modalContainer');
+    
+        openModalButton.addEventListener('click', function() {
+            // Cargar contenido del modal desde la página externa
+            fetch('/components/modalListPatient.html')
+                .then(response => response.text())
+                .then(content => {
+                    modalContainer.innerHTML = content;
+                    // Mostrar el modal después de cargar su contenido
+                    const pacienteModal = new bootstrap.Modal(document.getElementById('pacienteModal'));
+                    pacienteModal.show();
+                });
+        });
+    });
+    </script>
+    
+    
+    
+    
+    
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
