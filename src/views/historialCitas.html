@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="\css\styles.css">
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script src="/js/calendario.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Orthodontics</title>
+</head>
+<body>
+<!--  Barra de navegación -->
+<nav class="navbar navbar-expand-lg">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+        <img src="\img\logo.png" width="150" height="40" class="d-inline-block align-top" alt="">
+        | Agenda
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu de ventanas del sistema -->
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Agenda de Citas <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Citas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Nueva Cita</a>
+                    <a class="dropdown-item" href="#">Todas las Citas</a>
+                    <a class="dropdown-item" href="#">Calendario de citas</a>
+                    <a class="dropdown-item" href="/src/views/citasProgramadas.html">Citas del dia</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Pacientes
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Pacientes</a>
+                    <a class="dropdown-item" href="/src/views/agegarPaciente.html">Nuevo Paciente</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--  Tabla de Datos -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 ml-auto">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar...">
+        </div>
+        <div class="col-md-2">
+            <select id="filterType" class="form-control">
+                <option value="all">Todos</option>
+                <option value="name">Departamento</option>
+                <option value="city">No asistió</option>
+                <option value="city">Asistió</option>
+                <option value="city">Pendiente</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" onclick="filterTable()">Buscar</button>
+        </div>
+    </div>
+</div>
+<div class= "mt-5">
+    <div  class="table">
+        <table class="table">
+            <thead class="table-primary">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Asistencia</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Detalles</th>
+
+            </tr>
+            </thead>
+            <tbody id="dataTable">
+            <tr>
+                <th scope="row">1452567890256464</th>
+                <td>Juan Carlos Santana</td>
+                <td id="iconToChange">
+                <span class="material-icons">
+                schedule
+                </span>
+                </td>
+                <td>13:30</td>
+                
+                <td>
+                    <span class="material-icons">
+                info
+                </span>
+                    
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+        <nav aria-label="Citas">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+
+<script>
+    
+    function filterTable() {
+        let searchValue = document.getElementById('searchInput').value.toLowerCase();
+        let filterType = document.getElementById('filterType').value;
+        let filteredData = [];
+
+        if (searchValue) {
+            filteredData = data.filter(item => item[filterType].toLowerCase().includes(searchValue));
+        } else {
+            filteredData = data; 
+        }
+
+        displayData(filteredData);
+    }
+
+    function displayData(dataToDisplay) {
+        let tableBody = document.getElementById('dataTable');
+        tableBody.innerHTML = '';
+
+        for (let item of dataToDisplay) {
+            let row = tableBody.insertRow();
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.textContent = item.name;
+            cell2.textContent = item.city;
+        }
+    }
+    displayData(data);
+</script>
+
+</body>
+
+</html>
