@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="\css\styles.css">
+
+    <title>Orthodontics</title>
+  </head>
+  <body>
+
+    <div id="navbar-container"></div>
+
+    <div class="patientDetail container mt-5">
+        <h2 class="mb-4 h2">Detalles de Paciente</h2>
+        
+    <form>
+        <div class="row">
+            <!-- Primera Columna -->
+            <div class="col-md-6 mt-3">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre del Paciente" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" placeholder="Número de DNI" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Dirección del Paciente" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="Número de Teléfono" disabled>
+                </div>
+
+                <!-- List Group de Historial Medico -->
+                <ul class="list-group">
+                    <label for="historial" class="form-label">Historial Medico</label>
+                    <li class="list-group-item">Item 1</li>
+                    <li class="list-group-item">Item 2</li>
+                    <li class="list-group-item">Item 3</li>
+                </ul>
+            </div>
+
+            <!-- Segunda Columna -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="id" class="form-label mt-3">ID del Paciente</label>
+                    <input type="text" class="form-control" id="id" placeholder="ID del Paciente" disabled>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="sexo" class="form-label">Sexo</label>
+                    <select class="form-control" id="sexo" disabled>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="id" class="form-label">Correo</label>
+                    <input type="text" class="form-control" id="correo" placeholder="Correo" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Historial de Citas</label>
+                </div>
+                <div class="search-container">
+                    <div class="input-group mb-3 custom-search">
+                        <button class="btn btn-primary" type="button" id="buscar-registros">Buscar</button>
+                        <input type="text" class="form-control ml-1 custom-imput" placeholder="" aria-label="Buscar registros" aria-describedby="buscar-registros">
+                    </div>
+                </div>
+
+                <!-- Tabla, historial de citas -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ver</th>
+                                <th>Id</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="btn btn-link">
+                                    <img src="/img/carpet.png"  alt="" width="15" height="15">
+                                </button></td>
+                                <td>1</td>
+                                <td>2023-08-06</td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-link">
+                                    <img src="/img/carpet.png"  alt="" width="15" height="15">
+                                </button></td>
+                                <td>2</td>
+                                <td>2023-08-07</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        fetch('/components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar el Navbar:', error));
+    </script>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  </body>
+</html

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="\css\styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Orthodontics</title>
+  </head>
+  <body>
+    <!--  Barra de navegación -->
+    <div id="navbar-container"></div>
+    <h2>
+      <div class="form-group">
+        <label id="fecha" for="fecha">Hoy es</label>
+      </div>
+    </h2>
+
+    <!--  Tabla de Datos -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <div class="table">
+      <table class="table">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Asistencia</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Actualizar</th>
+            <th scope="col">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1452567890256464</th>
+            <td>Juan Carlos Santana</td>
+            <td id="iconToChange">
+              <span class="material-icons"> schedule </span>
+            </td>
+            <td>13:30</td>
+            <td>
+              <a
+                href="#"
+                class="btn btn-light btn-block"
+                data-toggle="modal"
+                data-target="#miModal"
+              >
+                <span class="material-icons"> edit </span>
+              </a>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="btn btn-light btn-block"
+                data-toggle="modal"
+                data-target="#MyModal"
+              >
+                <span class="material-icons"> info </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Citas">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      class="modal fade"
+      id="miModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Editar asistencia</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-content">
+              <div class="modal-body d-flex justify-content-center">
+                <!-- Sistema de grid para centrar los botones -->
+                <div class="col-4 text-center">
+                  <a
+                    href="#"
+                    class="btn btn-light btn-block"
+                    data-icon="check_circle"
+                  >
+                    <span class="material-icons"> check_circle </span>
+                  </a>
+                </div>
+                <div class="col-4 text-center">
+                  <a
+                    href="#"
+                    class="btn btn-light btn-block"
+                    data-icon="cancel"
+                  >
+                    <span class="material-icons"> cancel </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Guardar cambios
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  let selectedIcon = null; // Esta variable almacenará el ícono seleccionado temporalmente.
+
+                  document
+                    .querySelector('#miModal .btn[data-icon="check_circle"]')
+                    .addEventListener("click", function () {
+                      selectedIcon = "check_circle";
+                    });
+
+                  document
+                    .querySelector('#miModal .btn[data-icon="cancel"]')
+                    .addEventListener("click", function () {
+                      selectedIcon = "cancel";
+                    });
+
+                  // Agregar el listener al botón "Guardar cambios"
+                  document
+                    .querySelector("#miModal .btn.btn-primary")
+                    .addEventListener("click", function () {
+                      if (selectedIcon) {
+                        document.querySelector(
+                          "#iconToChange .material-icons"
+                        ).textContent = selectedIcon;
+                      }
+
+                      // Cerrar el modal
+                      $("#miModal").modal("hide");
+                    });
+                });
+              </script>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detalles de paciente -->
+
+    <div
+      class="modal fade"
+      id="MyModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Primera columna -->
+              <div class="col-md-6">
+                <!-- Campo Nombre -->
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">
+                    Nombre del Paciente</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value="Juan"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Departamento -->
+                <div class="mb-3">
+                  <label for="departamento" class="form-label">
+                    Departamento</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="departamento"
+                    name="departamento"
+                    value="Ortodoncia"
+                    disabled
+                  />
+                </div>
+              </div>
+              <!-- Segunda columna -->
+              <div class="col-md-6">
+                <!-- Campo Estado-->
+                <div class="mb-3">
+                  <label for="estado" class="form-label"> Estado</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="estado"
+                    name="estado"
+                    value="Confirmado"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Fecha y Hora -->
+
+                <div class="mb-3">
+                  <label for="fechahora" class="form-label">Fecha y Hora</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fecha"
+                    name="fecha"
+                    value="12/79"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hora"
+                    name="hora"
+                    value="10:00"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="motivo">Motivo de Cita:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="motivo"
+                  value="Colocacion de Brackets"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const date = new Date();
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("es-ES", options);
+    const fecha = document.getElementById("fecha");
+    fecha.innerHTML = `${fecha.textContent} ${formattedDate}`;
+  </script>
+
+  <!-- llamar el componente navbar -->
+  <script>
+    fetch("/components/navbar.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("navbar-container").innerHTML = data;
+      })
+      .catch((error) => console.error("Error al cargar el Navbar:", error));
+  </script>
+</html>

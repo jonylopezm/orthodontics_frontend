@@ -15,16 +15,34 @@
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
     />
-    s
+    <link rel="stylesheet" href="\css\styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="/js/calendar.js"></script>
 
     <title>Orthodontics</title>
   </head>
   <body>
+    <!-- Muestra el navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Muestra el calendario -->
+    <div id="calendar" class="fc fc-toolbar-title m-4"></div>
+
+    <!-- Muestra el modal de confirmacion -->
+    <div id="modalContainer"></div>
+
+    <!-- Muestra el modal de detailAppointment -->
+    <div id="modalDetailContainer"></div>
+
+    <!-- Script para traer el componente navbar.html -->
     <script>
-      // cargar homepage
-      document.addEventListener("DOMContentLoaded", function () {
-        window.location.href = "/src/views/homepage.html";
-      });
+      fetch("/components/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+        })
+        .catch((error) => console.error("Error al cargar el Navbar:", error));
     </script>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

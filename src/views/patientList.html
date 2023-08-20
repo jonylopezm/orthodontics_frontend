@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="orthodontics"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <title>Orthodontics</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <div class="container mt-5">
+      <h2 class="mb-4 h2">Pacientes</h2>
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
+        <div class="input-group mb-3 custom-search">
+          <button class="btn btn-primary" type="button" id="buscar-registros">
+            Buscar
+          </button>
+          <input
+            type="text"
+            class="form-control ml-1 custom-imput"
+            placeholder=""
+            aria-label="Buscar registros"
+            aria-describedby="buscar-registros"
+          />
+        </div>
+      </div>
+
+      <!-- Tabla de datos -->
+
+      <table
+        class="table table-sm table-hover dataTable display"
+        id="patientsTable"
+      >
+        <thead class="thead">
+          <tr class="table-light">
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Telefono</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>p1234</td>
+            <td>Juan López</td>
+            <td>0401-1987-12345</td>
+            <td>9374-5678</td>
+            <td>
+              <button type="button" class="btn btn-primary" id="1">
+                Detalles
+              </button>
+              <!-- redirige a pagina de detalles de paciente -->
+              <script>
+                document
+                  .getElementById("1")
+                  .addEventListener("click", function () {
+                    window.location.href = "/src/views/patientDetails.html";
+                  });
+              </script>
+            </td>
+          </tr>
+          <tr>
+            <td>p78545</td>
+            <td>Ramon Argueta</td>
+            <td>0401-1995-23456</td>
+            <td>9345-6789</td>
+            <td>
+              <button type="button" class="btn btn-primary" id="2">
+                Detalles
+              </button>
+              <script>
+                document
+                  .getElementById("2")
+                  .addEventListener("click", function () {
+                    window.location.href = "/src/views/patientDetails.html";
+                  });
+              </script>
+            </td>
+          </tr>
+          <tr>
+            <td>p4321</td>
+            <td>Maria Rodriguez</td>
+            <td>0401-1997-02456</td>
+            <td>9374-5678</td>
+            <td>
+              <button type="button" class="btn btn-primary" id="1">
+                Detalles
+              </button>
+              <!-- redirige a pagina de detalles de paciente -->
+              <script>
+                document
+                  .getElementById("1")
+                  .addEventListener("click", function () {
+                    window.location.href = "/src/views/patientDetails.html";
+                  });
+              </script>
+            </td>
+          </tr>
+          <tr>
+            <td>p0412</td>
+            <td>Ernesto Alvarado</td>
+            <td>0401-1999-00125</td>
+            <td>9374-5678</td>
+            <td>
+              <button type="button" class="btn btn-primary" id="1">
+                Detalles
+              </button>
+              <!-- redirige a pagina de detalles de paciente -->
+              <script>
+                document
+                  .getElementById("1")
+                  .addEventListener("click", function () {
+                    window.location.href = "/src/views/patientDetails.html";
+                  });
+              </script>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Paginacion -->
+
+      <nav aria-label="Citas">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <script>
+      fetch("/components/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+        })
+        .catch((error) => console.error("Error al cargar el Navbar:", error));
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
