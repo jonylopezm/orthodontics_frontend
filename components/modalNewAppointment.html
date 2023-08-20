@@ -1,97 +1,39 @@
-<!-- <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newAppointmentModalLabel">Nueva Cita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="hora">Hora:</label>
-                            <input type="time" class="form-control" id="hora">
-                        </div>
-                    </div> 
-    
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="fecha">Fecha:</label>
-                            <input type="date" class="form-control" id="appointmentDate" name="appointmentDate">               
-                        </div>
-                    </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="paciente">Paciente:</label>
-                            <input type="text" class="form-control" id="paciente">
-                        </div>  
-                        
-                        <div class="col-md-6 mt-4">
-                            <button type="button" class="btn btn-primary" id="seleccionarPaciente">Seleccionar</button>
-                            <button type="button" class="btn btn-primary" id="crearNuevoPaciente">Nuevo</button>
-                        </div>
-                    </div>
-    
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="motivo">Motivo de Cita:</label>
-                            <input type="text" class="form-control" id="motivo">
-                        </div>
-                    </div>  
-                    
-                    <div class="row mt-3">
-                        <div class="col form-group mb-3">
-                            <label for="departamento">Departamento:</label>
-                            <select class="form-control" id="departamento">
-                                <option value="ortodoncia">Ortodoncia</option>
-                                <option value="endodoncia">Endodoncia</option>
-                                <option value="odontologia">Odontología General</option>
-                            </select>
-                        </div>
-                    </div>
-                    </div>            
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        </div>
-</div> -->
-
 <!-- Modal de Confirmacion -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmar Nueva Cita</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Desea crear una nueva cita para la fecha:
-                <span id="confirmationDate"></span>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirmButton">Aceptar</button>
-            </div>
-        </div>
+<div
+  class="modal fade"
+  id="confirmationModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="confirmationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">
+          Confirmar Nueva Cita
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Cerrar"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Desea crear una nueva cita para la fecha:
+        <span id="confirmationDate"></span>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" id="confirmButton">
+          Aceptar
+        </button>
+      </div>
     </div>
+  </div>
 </div>
-
-<script>
-     document.addEventListener('DOMContentLoaded', function() {
-        const seleccionarPacienteBtn = document.getElementById('seleccionarPaciente');
-        const pacienteModal = new bootstrap.Modal(document.getElementById('pacienteModal'));
-
-        seleccionarPacienteBtn.addEventListener('click', function() {
-            pacienteModal.show(); // Mostrar el modal anidado al hacer clic en el botón
-        });
-    });
-</script>

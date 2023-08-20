@@ -1,133 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="orthodontics" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="orthodontics"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="\css\styles.css">
-   
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="\css\styles.css" />
+
     <title>Orthodontics</title>
   </head>
   <body>
-
     <!-- Muestra el navbar -->
     <div id="navbar-container"></div>
     <!-- Script para traer el componente navbar.html -->
     <script>
-        fetch('/components/navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar-container').innerHTML = data;
+      fetch("/components/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
         })
-        .catch(error => console.error('Error al cargar el Navbar:', error));
+        .catch((error) => console.error("Error al cargar el Navbar:", error));
     </script>
 
     <div class="container mt-3">
       <h2 class="mb-4 h2">Nueva Cita</h2>
       <form>
-          <div class="row">
-              <div class="col-md-6">
-                  <div class="mb-3">
-                      <label for="hora">Hora:</label>
-                      <input type="time" class="form-control" id="hora" placeholder="hh:mm AM/PM">
-                  </div>
-              </div> 
-      
-              <div class="col-md-6">
-                  <div class="mb-3">
-                      <label for="fecha">Fecha:</label>
-                      <input type="date" class="form-control" id="fecha" >
-                  </div>  
-              </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="hora">Hora:</label>
+              <input
+                type="time"
+                class="form-control"
+                id="hora"
+                placeholder="hh:mm AM/PM"
+              />
+            </div>
           </div>
-      
-          <div class="row">
-              <div class="col-md-6">
-                  <label for="paciente">Paciente:</label>
-                  <input type="text" class="form-control" id="paciente">
-              </div>  
-              
-              <div class="col-md-6 mt-4">
-                  <button type="button" class="btn btn-primary" id="seleccionarPaciente">Seleccionar Paciente</button>
-              </div>
-              <div id="modalContainer"></div>
+
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="fecha">Fecha:</label>
+              <input type="date" class="form-control" id="fecha" />
+            </div>
           </div>
-      
-          <div class="row mt-3">
-              <div class="col">
-                  <label for="motivo">Motivo de Cita:</label>
-                  <input type="text" class="form-control" id="motivo">
-              </div>
-          </div>  
-          
-          <div class="row mt-3">
-              <div class="col form-group mb-3">
-                  <label for="departamento">Departamento:</label>
-                  <select class="form-control" id="departamento">
-                      <option value="ortodoncia">Ortodoncia</option>
-                      <option value="endodoncia">Endodoncia</option>
-                      <option value="odontologia">Odontología General</option>
-                  </select>
-              </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label for="paciente">Paciente:</label>
+            <input type="text" class="form-control" id="paciente" />
           </div>
-          
-          <div class="row mt-3">
-              <div class="col">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary">Guardar</button>
-              </div>
+
+          <div class="col-md-6 mt-4">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="seleccionarPaciente"
+            >
+              Seleccionar Paciente
+            </button>
           </div>
+          <div id="modalContainer"></div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <label for="motivo">Motivo de Cita:</label>
+            <input type="text" class="form-control" id="motivo" />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col form-group mb-3">
+            <label for="departamento">Departamento:</label>
+            <select class="form-control" id="departamento">
+              <option value="ortodoncia">Ortodoncia</option>
+              <option value="endodoncia">Endodoncia</option>
+              <option value="odontologia">Odontología General</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
       </form>
     </div>
 
     <!-- Este script trae la fecha a la que se hizo click en el calendario -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    // Obtener el valor del parámetro de consulta 'date'
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedDate = urlParams.get('date');
+      document.addEventListener("DOMContentLoaded", function () {
+        // Obtener el valor del parámetro de consulta 'date'
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedDate = urlParams.get("date");
 
-    // Establecer el valor del campo de entrada de fecha
-    if (selectedDate) {
-        document.getElementById('fecha').value = selectedDate;
-    }
-    });
+        // Establecer el valor del campo de entrada de fecha
+        if (selectedDate) {
+          document.getElementById("fecha").value = selectedDate;
+        }
+      });
     </script>
 
     <!-- Script para cargar el modal lista de pacientes en el div modalContainer -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const openModalButton = document.getElementById('seleccionarPaciente');
-        const modalContainer = document.getElementById('modalContainer');
-    
-        openModalButton.addEventListener('click', function() {
-            // Cargar contenido del modal desde la página externa
-            fetch('/components/modalListPatient.html')
-                .then(response => response.text())
-                .then(content => {
-                    modalContainer.innerHTML = content;
-                    // Mostrar el modal después de cargar su contenido
-                    const pacienteModal = new bootstrap.Modal(document.getElementById('pacienteModal'));
-                    pacienteModal.show();
-                });
+      document.addEventListener("DOMContentLoaded", function () {
+        const openModalButton = document.getElementById("seleccionarPaciente");
+        const modalContainer = document.getElementById("modalContainer");
+
+        openModalButton.addEventListener("click", function () {
+          // Cargar contenido del modal desde la página externa
+          fetch("/components/modalListPatient.html")
+            .then((response) => response.text())
+            .then((content) => {
+              modalContainer.innerHTML = content;
+              // Mostrar el modal después de cargar su contenido
+              const pacienteModal = new bootstrap.Modal(
+                document.getElementById("pacienteModal")
+              );
+              pacienteModal.show();
+            });
         });
-    });
+      });
     </script>
-    
-    
-    
-    
-    
-    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

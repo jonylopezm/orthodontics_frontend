@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
   });
 
+  
   function openModal(date){
     /* Abrir la ventana modal para crear nueva cita */
     fetch('/components/modalNewAppointment.html')
