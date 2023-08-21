@@ -66,6 +66,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Tabla de registros -->
+
     <div class="mt-5">
       <div class="table">
         <table class="table">
@@ -75,10 +78,11 @@
               <th scope="col">Paciente</th>
               <th scope="col">Asistencia</th>
               <th scope="col">Hora</th>
+              <th scope="col">Editar</th>
               <th scope="col">Detalles</th>
             </tr>
           </thead>
-          <tbody id="dataTable">
+          <tbody>
             <tr>
               <th scope="row">1452567890256464</th>
               <td>Juan Carlos Santana</td>
@@ -86,9 +90,25 @@
                 <span class="material-icons"> schedule </span>
               </td>
               <td>13:30</td>
-
               <td>
-                <span class="material-icons"> info </span>
+                <a
+                  href="#"
+                  class="btn btn-light btn-block"
+                  data-toggle="modal"
+                  data-target="#miModal"
+                >
+                  <span class="material-icons"> edit </span>
+                </a>
+              </td>
+              <td>
+                <a
+                  href="#"
+                  class="btn btn-light btn-block"
+                  data-toggle="modal"
+                  data-target="#MyModal"
+                >
+                  <span class="material-icons"> info </span>
+                </a>
               </td>
             </tr>
           </tbody>
@@ -110,6 +130,236 @@
             </li>
           </ul>
         </nav>
+      </div>
+    </div>
+
+    <!-- Modal Editar cita -->
+
+    <div
+      class="modal fade"
+      id="MyModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Primera columna -->
+              <div class="col-md-6">
+                <!-- Campo Nombre -->
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">
+                    Nombre del Paciente</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value="Juan"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Departamento -->
+                <div class="mb-3">
+                  <label for="departamento" class="form-label">
+                    Departamento</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="departamento"
+                    name="departamento"
+                    value="Ortodoncia"
+                    disabled
+                  />
+                </div>
+              </div>
+              <!-- Segunda columna -->
+              <div class="col-md-6">
+                <!-- Campo Estado-->
+                <div class="mb-3">
+                  <label for="estado" class="form-label"> Estado</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="estado"
+                    name="estado"
+                    value="Confirmado"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Fecha y Hora -->
+
+                <div class="mb-3">
+                  <label for="fechahora" class="form-label">Fecha y Hora</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fecha"
+                    name="fecha"
+                    value="12/79"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hora"
+                    name="hora"
+                    value="10:00"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="motivo">Motivo de Cita:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="motivo"
+                  value="Colocacion de Brackets"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detalles de paciente -->
+
+    <div
+      class="modal fade"
+      id="MyModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Primera columna -->
+              <div class="col-md-6">
+                <!-- Campo Nombre -->
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">
+                    Nombre del Paciente</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value="Juan"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Departamento -->
+                <div class="mb-3">
+                  <label for="departamento" class="form-label">
+                    Departamento</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="departamento"
+                    name="departamento"
+                    value="Ortodoncia"
+                    disabled
+                  />
+                </div>
+              </div>
+              <!-- Segunda columna -->
+              <div class="col-md-6">
+                <!-- Campo Estado-->
+                <div class="mb-3">
+                  <label for="estado" class="form-label"> Estado</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="estado"
+                    name="estado"
+                    value="Confirmado"
+                    disabled
+                  />
+                </div>
+                <!-- Campo Fecha y Hora -->
+
+                <div class="mb-3">
+                  <label for="fechahora" class="form-label">Fecha y Hora</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fecha"
+                    name="fecha"
+                    value="12/79"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hora"
+                    name="hora"
+                    value="10:00"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="motivo">Motivo de Cita:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="motivo"
+                  value="Colocacion de Brackets"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
