@@ -1,114 +1,368 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="\css\styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="\css\styles.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="/js/calendario.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/js/app.js"></script>
 
     <title>Orthodontics</title>
-  </head>
-  <body>
-    <!-- No tiene uso -->
-    <!--  Barra de navegación -->
-    <nav class="navbar navbar-expand-lg">
-      <!-- Logo -->
-      <a class="navbar-brand" href="#">
-        <img
-          src="\img\logo.png"
-          width="150"
-          height="40"
-          class="d-inline-block align-top"
-          alt=""
-        />
-        | Agenda
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+</head>
 
-      <!-- Menu de ventanas del sistema -->
+<body>
 
-      <div
-        class="collapse navbar-collapse justify-content-center"
-        id="navbarNavDropdown"
-      >
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Agenda de Citas <span class="sr-only">(current)</span></a
-            >
-          </li>
+  <div id="navbar-container"></div>
 
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Citas
+  <!-- No tiene uso -->
+  <!--  Barra de navegación -->
+  <!-- <nav class="navbar navbar-expand-lg"> -->
+    <!-- Logo -->
+    <!-- <a class="navbar-brand" href="#">
+      <img src="\img\logo.png" width="150" height="40" class="d-inline-block align-top" alt="" />
+      | Agenda
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <!-- Menu de ventanas del sistema -->
+
+    <!-- <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Agenda de Citas <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Citas
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Nueva Cita</a>
+            <a class="dropdown-item" href="#">Todas las Citas</a>
+            <a class="dropdown-item" href="#">Calendario de citas</a>
+            <a class="dropdown-item" href="/src/views/citasProgramadas.html">Citas del dia</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Pacientes
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Pacientes</a>
+            <a class="dropdown-item" href="/src/views/agegarPaciente.html">Nuevo Paciente</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav> -->
+
+  <h2>
+  
+    <div class="form-group">
+      <label id="fecha" for="fecha">Hoy es</label>
+    </div>
+  
+  </h2>
+
+  <!--  Tabla de Datos -->
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <div class="table">
+    <table class="table">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Paciente</th>
+          <th scope="col">Asistencia</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Actualizar</th>
+          <th scope="col">Detalles</th>
+
+        </tr>
+      </thead>
+      <tbody id="dataTable">
+        <tr>
+          <th scope="row">1452567890256464</th>
+          <td>Juan Carlos Santana</td>
+          <td id="iconToChange">
+            <span class="material-icons">
+              schedule
+            </span>
+          </td>
+          <td>13:30</td>
+          <td>
+            <a href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#miModal">
+              <span class="material-icons">
+                edit
+              </span>
+
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Nueva Cita</a>
-              <a class="dropdown-item" href="#">Todas las Citas</a>
-              <a class="dropdown-item" href="#">Calendario de citas</a>
-              <a class="dropdown-item" href="/src/views/citasProgramadas.html"
-                >Citas del dia</a
-              >
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Pacientes
+          </td>
+          <td>
+            <a href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#miModal">
+              <span class="material-icons">
+                info
+              </span>
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Pacientes</a>
-              <a class="dropdown-item" href="/src/views/agegarPaciente.html"
-                >Nuevo Paciente</a
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+    <nav aria-label="Citas">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
     </nav>
 
-    <!--  Tabla de Datos -->
+  </div>
+  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Editar asistencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+          <div class="modal-content">
+            <div class="modal-body d-flex justify-content-center">
+              <!-- Sistema de grid para centrar los botones -->
+              <div class="col-4 text-center">
+                <a href="#" class="btn btn-light btn-block" data-icon="check_circle">
+                  <span class="material-icons">
+                    check_circle
+                  </span>
+                </a>
+              </div>
+              <div class="col-4 text-center">
+                <a href="#" class="btn btn-light btn-block" data-icon="cancel">
+                  <span class="material-icons">
+                    cancel
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="updateState(selectedRowId, oldIcon, selectedIcon)">
+            Guardar cambios
+            <script>
+
+              let oldIcon = null;
+              let selectedIcon = null;
+              let selectedRowId = null;
+
+              // Al abrir el modal, obtener el ID de la fila asociada al botón
+              $('#miModal').on('show.bs.modal', function (event) {
+
+                const button = event.relatedTarget;
+                selectedRowId = button.getAttribute('id');
+                // console.log('selectedRowId', selectedRowId);
+                // const iconCell = document.querySelector(`tr[id="${selectedRowId}"] .icon-cell`);
+
+                const iconCell = document.getElementById(`state-${selectedRowId}`);
+                // console.log('iconCell', iconCell)
+
+                if (iconCell) {
+
+                  oldIcon = iconCell.textContent; // Almacenar el estado viejo
+
+                }
+
+                // console.log('oldIcon', oldIcon);
+
+                const cancelButton = document.querySelector('#miModal .btn[data-icon="cancel"]');
+                const checkCircleButton = document.querySelector('#miModal .btn[data-icon="check_circle"]');
+
+                checkCircleButton.addEventListener('click', function () {
+                  selectedIcon = 'check_circle';
+                });
+
+                cancelButton.addEventListener('click', function () {
+                  selectedIcon = 'cancel';
+                });
+
+                const saveButton = document.querySelector('#miModal .btn.btn-primary');
+                saveButton.addEventListener('click', function () {
+
+                  $('#miModal').modal('hide');
+
+                });
+
+              });
+
+            </script>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <script>
+            // let idAppointment = null
+
+            $('#MyModal').on('show.bs.modal', function (event) {
+
+              const button = event.relatedTarget;
+              // alert(button.getAttribute('id'));
+
+              showDetailsAppointment(button.getAttribute('id'));
+
+            });
+
+          </script>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Primera columna -->
+            <div class="col-md-6">
+              <!-- Campo Nombre -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label"> Nombre del Paciente</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="" disabled>
+              </div>
+              <!-- Campo Departamento -->
+              <div class="mb-3">
+                <label for="departamento" class="form-label"> Departamento</label>
+                <input type="text" class="form-control" id="departamento" name="departamento" value="" disabled>
+              </div>
+            </div>
+            <!-- Segunda columna -->
+            <div class="col-md-6">
+              <!-- Campo Estado-->
+              <div class="mb-3">
+                <label for="estado" class="form-label"> Estado</label>
+                <input type="text" class="form-control" id="estado" name="estado" value="" disabled>
+              </div>
+              <!-- Campo Fecha y Hora -->
+
+              <div class="mb-3">
+                <label for="fechahora" class="form-label">Fecha y Hora</label>
+                <input type="text" class="form-control" id="fecha-details" name="fecha" value="" disabled>
+                <input type="text" class="form-control" id="hora" name="hora" value="" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="motivo">Motivo de Cita:</label>
+              <input type="text" class="form-control" id="motivo" value="" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          info
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- para errores -->
+  <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="customModel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="error-code">${appointments.code}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="error-message">${appointments.message || ''}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<script>
+  fetch('/components/navbar.html')
+  .then(response => response.text())
+  .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+  })
+  .catch(error => console.error('Error al cargar el Navbar:', error));
+</script>
+
+<script>
+
+  verifySession();
+
+  const date = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Tegucigalpa' };
+  const formattedDate = date.toLocaleDateString('es-HN', options);
+  const fecha = document.getElementById("fecha")
+  fecha.innerHTML = `${fecha.textContent} ${formattedDate}`
+
+  showAppointmentsToday();
+
+</script>
+
 </html>

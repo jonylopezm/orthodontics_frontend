@@ -32,6 +32,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
+    <script src="/js/app.js"></script>
+
     <title>Orthodontics</title>
   </head>
   <body>
@@ -52,17 +55,19 @@
         </div>
         <div class="col-md-2">
           <select id="filterType" class="form-control">
-            <option value="all">Todos</option>
-            <option value="name">Departamento</option>
-            <option value="city">No asistió</option>
-            <option value="city">Asistió</option>
-            <option value="city">Pendiente</option>
+            <option value="all" data-filter="all">Todos</option>
+            <option value="departamento" data-filter="departamento">Departamento</option>
+            <option value="No Asistió" data-filter="No Asistió">No Asistió</option>
+            <option value="Asistió" data-filter="Asistió">Asistió</option>
+            <option value="Pendiente" data-filter="Pendiente">Pendiente</option>
           </select>
         </div>
         <div class="col-md-2">
+          <!-- hace busqueda en tiempo real -->
           <button class="btn btn-primary" onclick="filterTable()">
             Buscar
           </button>
+          <!-- <button class="btn btn-primary" type="button" id="search-register" onclick="searchPatient(document.getElementById('searchInput').value)">Buscar</button> -->
         </div>
       </div>
     </div>
@@ -76,13 +81,14 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Paciente</th>
+              <th scope="col">Departamento</th>
               <th scope="col">Asistencia</th>
               <th scope="col">Hora</th>
               <th scope="col">Editar</th>
               <th scope="col">Detalles</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="dataTable">
             <tr>
               <th scope="row">1452567890256464</th>
               <td>Juan Carlos Santana</td>
@@ -115,7 +121,7 @@
         </table>
         <nav aria-label="Citas">
           <ul class="pagination justify-content-center">
-            <li class="page-item">
+            <!-- <li class="page-item">
               <a class="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
@@ -127,7 +133,7 @@
               <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>
@@ -155,6 +161,27 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
+            <script>
+              // let idAppointment = null
+
+              $('#modalEditar').on('show.bs.modal', function (event) {
+
+                const button = event.relatedTarget;
+                if (button) {
+
+                  const id = button.getAttribute('id');
+
+                  if (id) {
+
+                    showDetailsAppointmentEdit(id);
+
+                  }
+
+                }
+
+              });
+
+            </script>
           </div>
           <div class="modal-body">
             <div class="row">
@@ -168,7 +195,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="nombre"
+                    id="nombre-edit"
                     name="nombre"
                     value="Juan"
                     disabled
@@ -181,10 +208,10 @@
                 <div class="row mt-3">
                   <div class="col form-group mb-3">
                     <label for="departamento">Departamento:</label>
-                    <select class="form-control" id="departamento">
+                    <select class="form-control" id="departamento-edit">
                       <option value="ortodoncia">Ortodoncia</option>
-                      <option value="endodoncia">Endodoncia</option>
-                      <option value="odontologia">Odontología General</option>
+                      <option value="odontología">Odontología</option>
+                      <option value="especialidades">Especialidades</option>
                     </select>
                   </div>
                 </div>
@@ -198,7 +225,7 @@
                   <input
                     type="time"
                     class="form-control"
-                    id="hora"
+                    id="hora-edit"
                     placeholder="hh:mm AM/PM"
                   />
                 </div>
@@ -207,7 +234,7 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="fecha">Fecha:</label>
-                  <input type="date" class="form-control" id="fecha" />
+                  <input type="date" class="form-control" id="fecha-edit" />
                 </div>
               </div>
             </div>
@@ -217,21 +244,117 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="motivo"
+                  id="motivo-edit"
                   value="Colocacion de Brackets"
                 />
               </div>
             </div>
+            <div class="col-md-6">
+              <!-- Campo Estado-->
+              <div class="mb-3">
+                <label for="estado" class="form-label" hidden> Estado</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="estado-edit"
+                  name="estado"
+                  value="Pendiente"
+                  hidden
+                />
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">
               Cerrar
             </button>
+            <button type="button" class="btn btn-primary" onclick="updateAppointment(selectedRowId)">
+              Guardar cambios
+                <script>
+
+                  let selectedRowId = null;
+
+                  // vieja informacion
+                  // let oldDepartment = document.getElementById('departamento-edit').value;
+                  // let oldHour = document.getElementById('hora-edit').value;
+                  // let oldDate = document.getElementById('fecha-edit').value;
+                  // let oldReason = document.getElementById('reason-edit').value;
+
+                  // let department = undefined;
+                  // let hourNew = undefined;
+                  // let dateNew = undefined;
+                  // let reason = undefined;
+
+                  // let department = document.getElementById('departamento-edit').value;
+                  // let hourNew = document.getElementById('hora-edit').value;
+                  // let dateNew = document.getElementById('fecha-edit').value;
+                  // let reason = document.getElementById('motivo-edit').value;
+                  // let initialDepartment = '';
+                  // let initialHour = '';
+                  // let initialDate = '';
+                  // let initialReason = '';
+
+                  // Al abrir el modal, obtener el ID de la fila asociada al botón
+                  $('#modalEditar').on('show.bs.modal', function (event) {
+
+                    const button = event.relatedTarget;
+                    // alert(button);
+                    if (button) {
+
+                      const id = button.getAttribute('id');
+
+                      if (id) {
+
+                        selectedRowId = button.getAttribute('id');
+
+                      }
+
+                    }
+                    // showDetailsAppointmentEdit(selectedRowId);
+
+                    // initialDepartment = document.getElementById('departamento-edit').value;
+                    // initialHour = document.getElementById('hora-edit').value;
+                    // initialDate = document.getElementById('fecha-edit').value;
+                    // initialReason = document.getElementById('motivo-edit').value;
+
+                    // department = document.getElementById('departamento-edit').value;
+                    // hourNew = document.getElementById('hora-edit').value;
+                    // dateNew = document.getElementById('fecha-edit').value;
+                    // reason = document.getElementById('motivo-edit').value;
+
+                    // alert(button.getAttribute('id'))
+                    // console.log('selectedRowId', selectedRowId);
+                    // const iconCell = document.querySelector(`tr[id="${selectedRowId}"] .icon-cell`);
+
+                    // const iconCell = document.getElementById(`state-${selectedRowId}`);
+                    // // console.log('iconCell', iconCell)
+
+                    // if (iconCell) {
+
+                    //   oldIcon = iconCell.textContent; // Almacenar el estado viejo
+
+                    // }
+
+                    // console.log('oldIcon', oldIcon);
+
+                    // const cancelButton = document.querySelector('#modalEditar .btn[data-icon="cancel"]');
+                    // const checkCircleButton = document.querySelector('#modalEditar .btn[data-icon="check_circle"]');               
+
+                    const saveButton = document.querySelector('#modalEditar .btn.btn-primary');
+                    saveButton.addEventListener('click', function () {
+
+                      $('#modalEditar').modal('hide');
+
+                    });
+
+                  });
+
+                </script>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <!-- Modal Detalles de paciente -->
 
     <div
@@ -254,6 +377,19 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
+            <script>
+              // let idAppointment = null
+  
+              $('#MyModal').on('show.bs.modal', function (event) {
+  
+                const button = event.relatedTarget;
+                // alert(button.getAttribute('id'));
+  
+                showDetailsAppointment(button.getAttribute('id'));
+  
+              });
+  
+            </script>
           </div>
           <div class="modal-body">
             <div class="row">
@@ -298,7 +434,7 @@
                     class="form-control"
                     id="estado"
                     name="estado"
-                    value="Confirmado"
+                    value="Pendiente"
                     disabled
                   />
                 </div>
@@ -309,7 +445,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="fecha"
+                    id="fecha-details"
                     name="fecha"
                     value="12/79"
                     disabled
@@ -347,38 +483,28 @@
       </div>
     </div>
 
+    <!-- para errores -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="customModel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="code">${appointments.code}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="body">
+                  <p id="message">${appointments.message || ''}</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
     <script>
-      function filterTable() {
-        let searchValue = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        let filterType = document.getElementById("filterType").value;
-        let filteredData = [];
 
-        if (searchValue) {
-          filteredData = data.filter((item) =>
-            item[filterType].toLowerCase().includes(searchValue)
-          );
-        } else {
-          filteredData = data;
-        }
-
-        displayData(filteredData);
-      }
-
-      function displayData(dataToDisplay) {
-        let tableBody = document.getElementById("dataTable");
-        tableBody.innerHTML = "";
-
-        for (let item of dataToDisplay) {
-          let row = tableBody.insertRow();
-          let cell1 = row.insertCell(0);
-          let cell2 = row.insertCell(1);
-          cell1.textContent = item.name;
-          cell2.textContent = item.city;
-        }
-      }
-      displayData(data);
     </script>
 
     <script>
@@ -389,5 +515,76 @@
         })
         .catch((error) => console.error("Error al cargar el Navbar:", error));
     </script>
+
+
+    <script>
+
+      verifySession();
+      showAllAppointments();
+
+
+
+      const patientList = document.getElementById('dataTable');
+      const searchInput = document.getElementById('searchInput');
+
+      // Función para mostrar u ocultar filas según el término de búsqueda
+      function updatePatientList(searchTerm) {
+        searchTerm = searchTerm.toLowerCase();
+
+        for (const row of patientList.rows) {
+          let rowVisible = false;
+
+          for (const cell of row.cells) {
+            const cellContent = cell.textContent.toLowerCase();
+            if (cellContent.includes(searchTerm)) {
+              rowVisible = true;
+              break;
+            }
+          }
+
+          row.style.display = rowVisible ? 'table-row' : 'none';
+        }
+      }
+
+      // Evento para escuchar cambios en el campo de búsqueda
+      searchInput.addEventListener('input', function () {
+        const searchTerm = this.value;
+        updatePatientList(searchTerm);
+      });
+
+      // Actualiza la lista de pacientes al cargar la página
+      updatePatientList('');
+
+      // const dataTable = document.getElementById('dataTable');
+      const filterType = document.getElementById('filterType');
+
+      function updateTable(filterValue) {
+        for (const row of dataTable.rows) {
+          let rowVisible = false;
+
+          if (filterValue === 'all') {
+            rowVisible = true;
+          } else {
+            const filterCell = row.querySelector(`td[data-filter="${filterValue}"]`);
+            if (filterCell) {
+              rowVisible = true;
+            }
+          }
+
+          row.style.display = rowVisible ? 'table-row' : 'none';
+        }
+      }
+
+      // Evento para escuchar cambios en el filtro
+      filterType.addEventListener('change', function () {
+        const selectedFilter = this.value;
+        updateTable(selectedFilter);
+      });
+
+      // Actualiza la tabla al cargar la página
+      updateTable('all');
+
+    </script>
+
   </body>
 </html>
