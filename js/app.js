@@ -611,7 +611,7 @@ const newAppointment = async () => {
 
     const newAppointment = await fetchPetition(`/appointments`, 'POST', { date, hour, patient, reason, department });
 
-    if (newAppointment.code !== 200) {
+    if (newPatient.code !== 200 || newPatient.code !== 201) {
 
         if (newAppointment.message === undefined) {
                 
@@ -1123,29 +1123,155 @@ const searchPatientModal = async (text) => {
 
 };
 
-const createPatient = async () => {
+const newPatient = async () => {
+
+    let name = document.getElementById('nombre').value;
+    let email = document.getElementById('correo').value;
+    let phone = document.getElementById('telefono').value;
+    let address = document.getElementById('direccion').value;
+    let dni = document.getElementById('dni').value;
+
+    const modalCode = document.getElementById('code');
+    const modalMessage = document.getElementById('message');
+
+    if (name === '' || phone === '') {
+
+        $('#modal').modal('show');
+
+        modalCode.textContent = 'Campos obligatorios';
+        modalMessage.textContent = 'El nombre y télefono son campos obligatorios';
+
+        return;
+
+    }
+
+    if (phone !== '') {
+
+        const phonePattern = /^[0-9]{1,8}$/i;
+
+        if (!phonePattern.test(phone)) {
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = 'Teléfono inválido';
+            modalMessage.textContent = 'Por favor, ingrese un número de teléfono válido, por ejemplo: 98765432';
+
+            return;
+
+        }
+
+        phone = parseInt(phone);
+
+    }
+
+    if (email !== '') {
+
+        const emailPattern = /^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/i;
+
+        if (!emailPattern.test(email)) {
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = 'Correo inválido';
+            modalMessage.textContent = 'Por favor, ingrese un correo válido por ejemplo: example@example.com';
+
+            return;
+
+        }
+
+    }
+
+    if (dni !== '') {
+
+        const dniPattern = /^([0-9]{4})\-([0-9]{4})\-([0-9]{5})$/i;
+
+        if (!dniPattern.test(dni)) {
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = 'DNI inválido';
+            modalMessage.textContent = 'Por favor, ingrese un DNI válido por ejemplo: 1234-5678-90123';
+
+            return;
+
+        }
+
+    }
+
+    if (email === '')
+        email = undefined;
+
+    if (address === '')
+        address = undefined;
+
+    if (dni === '')
+        dni = undefined;
+
+    const newPatient = await fetchPetition(`/patients`, 'POST', { name, email, phone, address, dni });
+
+    if (newPatient.code !== 200 && newPatient.code !== 201) {
+
+        if (newPatient.message === undefined) {
+                
+            let errorMessage = '';
+            let field = '';
+        
+            newPatient.results.forEach(result => {
+                // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+                field = formattingWords(result.property);
+                
+                Object.entries(result.errors).forEach(value => {
+                    errorMessage += `- ${value.map(t => ` ${t}`).join('<br>')}`;
+                });
+        
+                errorMessage += '<br><br>';
+            });
+        
+            const errorAlert = `
+                <div class="alert" role="alert" align="left">
+                    ${errorMessage}
+                </div>
+            `;
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = field;
+            modalMessage.innerHTML = errorAlert;
+
+            return;
+
+        }
+
+        $('#modal').modal('show');
+
+        modalCode.textContent = newPatient.code;
+        modalMessage.textContent = newPatient.message || '';
+
+        // limpiar campos
+        // name.value = '';
+        // email.value = '';
+        // phone.value = '';
+        // address.value = '';
+        // dni.value = '';
+        
+        return;
+        
+    }
+    console.log('?')
     
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
+    // mostrar confirmación
+    $('#modal').modal('show');
     
-        // if (name === '' || email === undefined || phone === '') {
+    modalCode.textContent = newPatient.code;
+    modalMessage.textContent = newPatient.message || '';
     
-        //     $('#error').modal('show');
-    
-        //     document.getElementById('error-code').textContent = '';
-        //     document.getElementById('error-message').textContent = 'Campos vacíos';
-    
-        //     return;
-    
-        // }
-    
-        // if (!(email.match(/^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/))) {
-    
-        //     $('#error').modal('show');
-    
-        //     document.getElementById('error-code').textContent = 'Correo inválido';
-        //     document.getElementById('error-message').textContent = 'Por favor, ingrese un correo válido por ejemplo: 
+
+    $('#modal').on('hidden.bs.modal', function () {
+        window.location.href = '/src/views/patientList.html';
+    });
+
+    return;
+
 };
 
 // const updateAppointment = async (id, initialDepartament, initialHour , initialDate, initialReason) => {
@@ -1259,6 +1385,146 @@ const updateAppointment = async (id) => {
     // $('#modal').on('hidden.bs.modal', function () {
     //     window.location.href = '/src/views/homepage.html';
     // });
+
+    return;
+
+};
+
+const newUser = async () => {
+
+    let firstname = document.getElementById('nombre').value;
+    let surname = document.getElementById('apellido').value;
+    let email = document.getElementById('correo').value;
+    let phone = document.getElementById('telefono').value;
+    let password = document.getElementById('password').value;
+    let confirm_password = document.getElementById('confirmarPassword').value;
+    let role = document.getElementById('rol').value;
+
+    const modalCode = document.getElementById('code');
+    const modalMessage = document.getElementById('message');
+
+    if (firstname === '' || email === '' || phone === '' || password === '' || confirm_password === '' || role === '') {
+
+        $('#modal').modal('show');
+
+        modalCode.textContent = 'Campos obligatorios';
+        modalMessage.textContent = 'Todos los campos son obligatorios';
+
+        return;
+
+    }
+
+    // if (phone !== '') {
+
+        const phonePattern = /^[0-9]{1,8}$/i;
+
+        if (!phonePattern.test(phone)) {
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = 'Teléfono inválido';
+            modalMessage.textContent = 'Por favor, ingrese un número de teléfono válido, por ejemplo: 98765432';
+
+            return;
+
+        }
+
+        phone = parseInt(phone);
+
+    // }
+
+    // if (email !== '') {
+
+        const emailPattern = /^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/i;
+
+        if (!emailPattern.test(email)) {
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = 'Correo inválido';
+            modalMessage.textContent = 'Por favor, ingrese un correo válido por ejemplo: example@example.com';
+
+            return;
+
+        }
+
+    // }
+
+    if (password !== confirm_password) {
+
+        $('#modal').modal('show');
+
+        modalCode.textContent = 'Contraseñas no coinciden';
+        modalMessage.textContent = 'Por favor, ingrese contraseñas iguales';
+
+        return;
+
+    }
+
+    const name = `${firstname} ${surname}`;
+
+    const newPatient = await fetchPetition(`/user/new`, 'POST', { name, email, phone, password, confirm_password, role });
+
+    if (newPatient.code !== 200 && newPatient.code !== 201) {
+
+        if (newPatient.message === undefined) {
+                
+            let errorMessage = '';
+            let field = '';
+        
+            newPatient.results.forEach(result => {
+                // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+                field = formattingWords(result.property);
+                
+                Object.entries(result.errors).forEach(value => {
+                    errorMessage += `- ${value.map(t => ` ${t}`).join('<br>')}`;
+                });
+        
+                errorMessage += '<br><br>';
+            });
+        
+            const errorAlert = `
+                <div class="alert" role="alert" align="left">
+                    ${errorMessage}
+                </div>
+            `;
+
+            $('#modal').modal('show');
+
+            modalCode.textContent = field;
+            modalMessage.innerHTML = errorAlert;
+
+            return;
+
+        }
+
+        $('#modal').modal('show');
+
+        modalCode.textContent = newPatient.code;
+        modalMessage.textContent = newPatient.message || '';
+
+        // limpiar campos
+        // name.value = '';
+        // email.value = '';
+        // phone.value = '';
+        // address.value = '';
+        // dni.value = '';
+        
+        return;
+        
+    }
+    console.log('?')
+    
+    // mostrar confirmación
+    $('#modal').modal('show');
+    
+    modalCode.textContent = newPatient.code;
+    modalMessage.textContent = newPatient.message || '';
+    
+
+    $('#modal').on('hidden.bs.modal', function () {
+        window.location.href = '/src/views/citasProgramadas.html';
+    });
 
     return;
 
