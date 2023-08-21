@@ -504,7 +504,7 @@ const updateState = async (id, oldIcon, selectedIcon) => {
 // Mostrar detalles de cita
 const showDetailsAppointment = async (id) => {
 
-    console.log('||', id);
+    // console.log('||', id);
 
     const details = await fetchPetition(`/appointments/id/${id}`, 'GET', {});
 
@@ -1271,6 +1271,191 @@ const newPatient = async () => {
     });
 
     return;
+
+};
+
+const showDetailsPatient = async () => {
+
+    console.log('?');
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get('id') === null || urlParams.get('id') === undefined) {
+
+        return window.location.href = '/src/views/patientList.html';
+
+    }
+
+    const info = urlParams.get('id').split(/\?=/);
+    
+    const id = info.toString();
+    
+    const idField = document.getElementById('id');
+    const name = document.getElementById('nombre');
+    const email = document.getElementById('correo');
+    const phone = document.getElementById('telefono');
+    const address = document.getElementById('direccion');
+    const dni = document.getElementById('dni');
+    const historial = document.getElementById('historial');
+
+    const patient = await fetchPetition(`/patients/${id}`, 'GET', {});
+
+    if (patient.code !== 200) {
+
+        $('#modal').modal('show');
+
+        document.getElementById('code').textContent = patient.code;
+        document.getElementById('message').textContent = patient.message || '';
+
+        return;
+
+    }
+
+    idField.value = patient.results._id;
+    name.value = patient.results.name;
+    email.value = patient.results.email || 'No disponible';
+    phone.value = patient.results.phone;
+    address.value = patient.results.address || 'No disponible';
+    dni.value = patient.results.dni || 'No disponible';
+    
+    if (patient.results.medical_record.length > 0) {
+
+        historial.innerHTML = '';
+
+        for (const item of patient.results.medical_record) {
+
+            console.log(item);
+
+            //<li class="list-group-item">Item 1</li>
+            const li = document.createElement('li');
+
+            li.classList.add('list-group-item');
+            li.textContent = item.name;
+
+            historial.appendChild(li);
+
+        }
+
+    } else {
+
+        historial.innerHTML = '<li class="list-group-item">No hay registros</li>';
+
+    }
+
+    // showAppointmentsUser(1);
+
+    return;
+
+};
+
+const showAppointmentsUser = async (page) => {
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get('id') === null || urlParams.get('id') === undefined) {
+
+        return window.location.href = '/src/views/patientList.html';
+
+    }
+
+    const info = urlParams.get('id').split(/\?=/);
+    
+    const id = info.toString();
+
+    const appointmentsRecord = document.getElementById('appointments-record');
+    appointmentsRecord.innerHTML = '';
+
+    // Actualizar elementos de paginación
+    const paginationList = document.querySelector('.pagination');
+    paginationList.innerHTML = '';
+
+    const appointments = await fetchPetition(`/appointments/patient/${id}`, 'GET', {});
+
+    console.log(appointments)
+
+    if (appointments.code !== 200) {
+
+        appointmentsRecord.innerHTML = '<li class="list-group-item">No hay registros</li>';
+
+    }
+
+    for (const item of appointments.results) {
+
+        const row = appointmentsRecord.insertRow();
+
+        row.setAttribute('id', item._id);
+
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+       
+        cell1.innerHTML = `  <td><button id="${item._id}" class="btn btn-link" disabled>
+                                <img src="/img/carpet.png"  alt="" width="13" height="13">
+                            </button></td>`;
+        // cell1.textContent = item._id;
+        cell2.textContent = item._id;
+        // cell3.textContent = item.department.name;
+        // cell3.setAttribute('data-filter', 'departamento');
+        
+        // cell3.classList.add('icon-cell');
+        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
+
+        cell3.textContent = item.date.split('T')[0].split('-').reverse().join('/');
+
+    }
+
+    if (appointments.totalPages === 1)
+        return;
+
+    if (page > 1) {
+        
+        const prevPageItem = document.createElement('li');
+        
+        prevPageItem.classList.add('page-item');
+        
+        prevPageItem.innerHTML = `
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        `;
+        
+        prevPageItem.addEventListener('click', () => showAppointmentsUser(page - 1));
+        
+        paginationList.appendChild(prevPageItem);
+    
+    }
+
+    for (let i = 1; i <= appointments.totalPages; i++) {
+        
+        const pageItem = document.createElement('li');
+        
+        pageItem.classList.add('page-item');
+        
+        pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        
+        pageItem.addEventListener('click', () => showAppointmentsUser(i));
+        
+        paginationList.appendChild(pageItem);
+
+    }
+
+    if (page < appointments.totalPages) {
+
+        const nextPageItem = document.createElement('li');
+        
+        nextPageItem.classList.add('page-item');
+        
+        nextPageItem.innerHTML = `
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        `;
+        
+        nextPageItem.addEventListener('click', () => showAppointmentsUser(page + 1));
+        
+        paginationList.appendChild(nextPageItem);
+    
+    }
 
 };
 

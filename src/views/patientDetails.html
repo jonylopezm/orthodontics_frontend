@@ -44,9 +44,11 @@
                 <!-- List Group de Historial Medico -->
                 <ul class="list-group">
                     <label for="historial" class="form-label">Historial Medico</label>
-                    <li class="list-group-item">Item 1</li>
-                    <li class="list-group-item">Item 2</li>
-                    <li class="list-group-item">Item 3</li>
+                    <div id="historial" class="list-group" style="max-height: 200px; overflow-y: auto;">
+                        <li class="list-group-item">Item 1</li>
+                        <li class="list-group-item">Item 2</li>
+                        <li class="list-group-item">Item 3</li>
+                    </div>
                 </ul>
             </div>
 
@@ -65,12 +67,12 @@
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Historial de Citas</label>
                 </div>
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <div class="input-group mb-3 custom-search">
                         <button class="btn btn-primary" type="button" id="buscar-registros">Buscar</button>
                         <input type="text" class="form-control ml-1 custom-imput" placeholder="" aria-label="Buscar registros" aria-describedby="buscar-registros">
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Tabla, historial de citas -->
                 <div class="table-responsive">
@@ -82,7 +84,7 @@
                                 <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="appointments-record">
                             <tr>
                                 <td><button class="btn btn-link">
                                     <img src="/img/carpet.png"  alt="" width="13" height="13">
@@ -146,17 +148,17 @@
     </div>
 
     <!-- para errores -->
-    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="customModel" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="customModel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="error-code">${appointments.code}</h5>
+                    <h5 class="modal-title" id="code">${appointments.code}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="error-message">${appointments.message || ''}</p>
+                    <p id="message">${appointments.message || ''}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
@@ -168,6 +170,8 @@
     <script>
 
         verifySession();
+        showDetailsPatient();
+        showAppointmentsUser();
 
         fetch('/components/navbar.html')
         .then(response => response.text())
