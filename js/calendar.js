@@ -34,15 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // showNonCurrentDates: false,
     datesSet: function (dateInfo) {
 
-      // const start = dateInfo.startStr;
-      // const end = dateInfo.endStr;
-
       const start = new Date(dateInfo.start).toLocaleDateString('es-HN', { timeZone: 'America/Tegucigalpa' });
       const end = new Date(dateInfo.end).toLocaleDateString('es-HN', { timeZone: 'America/Tegucigalpa' });
 
       const arrayStart = start.split('/');
-
-      // const end = `${new Date(arrayStart[2], arrayStart[1], 0).getDate()}/${arrayStart[1]}/${arrayStart[2]}`;
 
       fetchingEvents = false;
 
@@ -57,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (fetchingEvents) {
 
-      // console.log('Petición en curso, esperando respuesta...');
       return;
 
     }
@@ -70,8 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const eventsAllApp = [];
 
       const response = await fetchPetition(`/appointments/calendar?start=${startDate}&end=${endDate}&page=1`, 'GET');
-
-      // console.log('response', response);
 
       if (response.code === 200) {
 
@@ -102,43 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        // aca se renderiza el calendario una sola vez pero al rato
-        // calendar.removeAllEvents();
-        // calendar.addEventSource(eventsAllApp);
-
       }
-      /* // muestra error en cada mes que no tiene citas registradas
-      else {
-  
-        // crear un modal de que no hay citas registradas
-        $('#errors-calendar').html(`
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                  <h5 class="modal-title" id="error-code">${response.code}</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <p id="error-message">${response.message || ''}</p>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
-              </div>
-            </div>
-          </div>
-        `).modal('show');
-  
-        console.log('No hay citas registradas');
-      
-        // renderCalendar([]);
-        
-        return;
-  
-      }*/
-
-      // }
 
     } catch (error) {
 
@@ -162,20 +118,7 @@ function openNewAppointment(date) {
     .then((response) => response.text())
     .then((content) => {
 
-      // if ()
-
-      // console.log(convertDateToDDMMYYYY(date))
-
       const currentDate = new Date().toLocaleDateString('es-HN', { timeZone: 'America/Tegucigalpa' });
-
-      // console.log(currentDay);
-
-      // console.log([convertDateToDDMMYYYY(date), currentDay].sort(compareDate));
-
-      // const [date1, date2] = [convertDateToDDMMYYYY(date), currentDay].sort(compareDate);
-
-      // Formatear la fecha para el input tipo date (YYYY-MM-DD)
-      // const formattedDate = formatDateForInput(date);
 
       if (!validateOnlyDateNew(convertDateToDDMMYYYY(date))) {
 
@@ -212,7 +155,7 @@ function openNewAppointment(date) {
 }
 
 function openModal(id) {
-  // console.log(id);
+
   /* Abrir la ventana modal para modalAppointmentDetail */
   fetch("/components/modalAppointmentDetail.html")
     .then((response) => response.text())
@@ -243,8 +186,6 @@ const convertDateToDDMMYYYY = (date) => {
   const year = date.getUTCFullYear();
   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
   const day = date.getUTCDate().toString().padStart(2, '0');
-
-  // console.log(`${day}/${month}/${year}`);
   
   return `${day}/${month}/${year}`;
 
@@ -257,8 +198,6 @@ const convertDateToYYYYMMDD = (date) => {
 };
 
 const compareDate = (a, b) => {
-
-  console.log(a, b);
     
   const dateA = new Date(`${convertDateToYYYYMMDD(a)}`);
   const dateB = new Date(`${convertDateToYYYYMMDD(b)}`);
@@ -335,8 +274,6 @@ const formatTimeTo24Hours = (time12h) => {
 // Repetido porque no funciona desde el script de app.js
 const showDetailsAppointment = async (id) => {
 
-  // console.log(id);
-
   const details = await fetchPetition(`/appointments/id/${id}`, 'GET', {});
 
   if (details.code !== 200) {
@@ -357,16 +294,12 @@ const showDetailsAppointment = async (id) => {
   const reason = document.getElementById('motivo');
   const department = document.getElementById('departamento');
 
-  // console.log(name.value);
-
   name.value = details.results.patient.name;
   state.value = details.results.state;
   date.value = details.results.department.name;
   hour.value = details.results.hour;
   reason.value = details.results.reason;
   department.value = details.results.department.name;
-
-  console.log(details.results.date.split('T')[0].split('-').reverse().join('/'))
 
   return;
       

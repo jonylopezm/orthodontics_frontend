@@ -5,53 +5,7 @@ window.onload = function() {
 
     const btnRegister = document.getElementById('btn-registrarse');
     const btnSignin = document.getElementById('btn-signin');
-    const btnSignin1 = document.getElementById('btn-signin1');
     const signinForm = document.getElementById('signin-form');
-
-    // if (signinForm) {
-
-    //     signinForm.onsubmit = async function (e) {
-
-    //         const email = document.getElementById('email').value;
-    //         const pwd = document.getElementById('pwd').value;
-
-    //         alert(email + ' ' + pwd);
-
-    //         if (email === '' || pwd === '') {
-    //             e.preventDefault();
-    //         }
-
-    //     };
-
-    // }
-    
-    /*
-    // antes de presionar el botón de registrarse, se verifica que el correo sea válido
-    const emailInput = document.getElementById('email');
-    const emailError = document.getElementById('email-error');
-
-    emailInput.addEventListener('input', function () {
-        
-        const email = emailInput.value;
-
-        if (email == '') {
-
-            return emailError.textContent = '';
-
-        }
-        
-        if (email.match(/^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/)) {
-            
-            return emailError.textContent = '';
-       
-        } else {
-            
-            emailError.textContent = 'Correo inválido';
-        
-        }
-
-    });
-    */
 
     if (btnSignin) {
 
@@ -62,24 +16,6 @@ window.onload = function() {
 
             if (email === '' || password === '') {
             
-                // return Swal.fire({
-                //     html: `
-                //     <div class="container">
-                //         <h2 class="mb-3">Campos vacíos</h2>
-                //         <p>Por favor, ingrese su correo y contraseña.</p>
-                //     </div>
-                //     `,
-                //     showConfirmButton: true,
-                //     confirmButtonText: "Aceptar",
-                //     confirmButtonColor: "#007bff",
-                //     icon: "warning",
-                //     iconColor: "#007bff",
-                //     customClass: {
-                //         popup: 'custom-swal-popup',
-                //         confirmButton: 'btn btn-primary'
-                //     }
-                // });
-
                 $('#errors-login').modal('show');
 
                 document.getElementById('error-code').textContent = '';
@@ -90,23 +26,6 @@ window.onload = function() {
             }
 
             if (!(email.match(/^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/))) {
-             
-                // return Swal.fire({
-                //     html: `
-                //     <div class="container">
-                //         <h2 class="mb-3">Correo inválido</h2>
-                //         <p>Por favor, ingrese un correo válido por ejemplo: example@example.com</p>
-                //     </div>
-                //     `,
-                //     showConfirmButton: true,
-                //     confirmButtonText: "Aceptar",
-                //     confirmButtonColor: "#007bff",
-                //     customClass: {
-                //         popup: 'custom-swal-popup',
-                //         confirmButton: 'btn btn-primary'
-
-                //     }
-                // });
 
                 $('#errors-login').modal('show');
 
@@ -119,15 +38,13 @@ window.onload = function() {
 
             const fetchResponse = await fetchPetition(`/auth/signin`, 'POST', { email, password });
 
-            // console.log(fetchResponse);
-
             if (fetchResponse.message === undefined) {
                 
                 let errorMessage = '';
                 let field = '';
             
                 fetchResponse.results.forEach(result => {
-                    // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+
                     field = formattingWords(result.property);
                     
                     Object.entries(result.errors).forEach(value => {
@@ -158,27 +75,6 @@ window.onload = function() {
 
             } else {
 
-                // return Swal.fire({
-                //     html: `
-                //         <div class="container">
-                //             <div class="row">
-                //                 <div class="col-12 text-center">
-                //                     <h1 class="display-4">${fetchResponse.code}</h1>
-                //                     <p class="lead">${fetchResponse.message || ''}</p>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     `,
-                //     showConfirmButton: true,
-                //     confirmButtonText: "Aceptar",
-                //     confirmButtonColor: "#007bff",
-                //     customClass: {
-                //         popup: 'custom-swal-popup',
-                //         confirmButton: 'btn btn-primary',
-                //         container: 'custom-swal-container'
-                //     }
-                // });
-
                 $('#errors-login').modal('show');
 
                 document.getElementById('error-code').textContent = fetchResponse.code;
@@ -197,8 +93,6 @@ window.onload = function() {
 // para las citas del dia
 const showAllAppointments = async (page) => {
 
-    // console.log(page);
-
     // para validar codigos diferentes a 200
     // page = 100;
     
@@ -215,8 +109,6 @@ const showAllAppointments = async (page) => {
     tableBody.innerHTML = '';
 
     const appointments = await fetchPetition(`/appointments?page=${page}`, 'GET', {});
-    // const appointments = response.results;
-    // const totalPages = response.totalPages;
 
     if (appointments.code !== 200) {
 
@@ -253,9 +145,6 @@ const showAllAppointments = async (page) => {
         cell4.innerHTML = `<span id="state-${item._id}"  class="material-icons">${icons[item.state]}</span>`;
         cell4.setAttribute('data-filter',  item.state);
         
-        // cell3.classList.add('icon-cell');
-        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
-
         cell5.textContent = item.hour;
         cell6.innerHTML = `<a id="${item._id}" href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#modalEditar"> 
             <span class="material-icons">edit</span></a>`;
@@ -326,8 +215,6 @@ const showAllAppointments = async (page) => {
 // para las citas del dia
 const showAppointmentsToday = async (page) => {
 
-    // console.log(page);
-
     // para validar codigos diferentes a 200
     // page = 100;
     
@@ -344,8 +231,6 @@ const showAppointmentsToday = async (page) => {
     tableBody.innerHTML = '';
 
     const appointments = await fetchPetition(`/appointments/today?page=${page}`, 'GET', {});
-    // const appointments = response.results;
-    // const totalPages = response.totalPages;
 
     if (appointments.code !== 200) {
 
@@ -376,10 +261,7 @@ const showAppointmentsToday = async (page) => {
         cell1.textContent = item._id;
         cell2.textContent = item.patient.name;
         cell3.innerHTML = `<span id="state-${item._id}"  class="material-icons">${icons[item.state]}</span>`;
-        
-        // cell3.classList.add('icon-cell');
-        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
-
+    
         cell4.textContent = item.hour;
         cell5.innerHTML = `<a id="${item._id}" href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#miModal"> 
             <span class="material-icons">edit</span></a>`;
@@ -447,19 +329,6 @@ const showAppointmentsToday = async (page) => {
 
 };
 
-// // Función para obtener el ícono de asistencia
-// function getAsistenciaIcon(state) {
-
-//     const icons = { 
-//         'Pendiente': 'schedule',
-//         'Asistió': 'check_circle',
-//         'No asistió': 'cancel text-danger'
-//     };
-
-//     return `<span class="material-icons">${icons[state]}</span>`;
-
-// }
-
 // Actualizar estado
 const updateState = async (id, oldIcon, selectedIcon) => {
 
@@ -468,10 +337,6 @@ const updateState = async (id, oldIcon, selectedIcon) => {
         'check_circle': 'Asistió',
         'cancel': 'No Asistió'
     };
-
-    // console.log('selectedIcon', selectedIcon);
-    // console.log('oldIcon', oldIcon);
-    // console.log('id', id);
 
     if (oldIcon === selectedIcon) 
         return;
@@ -504,8 +369,6 @@ const updateState = async (id, oldIcon, selectedIcon) => {
 // Mostrar detalles de cita
 const showDetailsAppointment = async (id) => {
 
-    // console.log('||', id);
-
     const details = await fetchPetition(`/appointments/id/${id}`, 'GET', {});
 
     if (details.code !== 200) {
@@ -526,8 +389,6 @@ const showDetailsAppointment = async (id) => {
     const reason = document.getElementById('motivo');
     const department = document.getElementById('departamento');
 
-    // console.log(name.value);
-
     name.value = details.results.patient.name;
     state.value = details.results.state;
     date.value = details.results.date.split('T')[0].split('-').reverse().join('/');
@@ -535,16 +396,12 @@ const showDetailsAppointment = async (id) => {
     reason.value = details.results.reason;
     department.value = details.results.department.name;
 
-    // console.log(details.results.date.split('T')[0].split('-').reverse().join('/'));
-
     return;
         
 };
 
 // Mostrar detalles de cita
 const showDetailsAppointmentEdit = async (id) => {
-
-    // console.log(id);
 
     const details = await fetchPetition(`/appointments/id/${id}`, 'GET', {});
 
@@ -566,7 +423,6 @@ const showDetailsAppointmentEdit = async (id) => {
     const department = document.getElementById('departamento-edit');
     const state = document.getElementById('estado-edit');
 
-    // console.log(name.value);
     const hourMeridiem = details.results.hour.split(' ')[1].toUpperCase();
     const hourFormat = `${details.results.hour.split(' ')[0]} ${hourMeridiem}`;
 
@@ -589,9 +445,6 @@ const newAppointment = async () => {
     const patient = document.getElementById('paciente').value;
     const reason = document.getElementById('motivo').value;
     const department = document.getElementById('departamento').value;
-
-    // alert(department.value);
-    // console.log(hour);
 
     const modalCode = document.getElementById('code');
     const modalMessage = document.getElementById('message');
@@ -619,7 +472,7 @@ const newAppointment = async () => {
             let field = '';
         
             newAppointment.results.forEach(result => {
-                // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+
                 field = formattingWords(result.property);
                 
                 Object.entries(result.errors).forEach(value => {
@@ -654,7 +507,6 @@ const newAppointment = async () => {
         hour.value = '';
         patient.value = '';
         reason.value = '';
-        // department.value = '';
         
         return;
         
@@ -677,8 +529,6 @@ const newAppointment = async () => {
 // patients
 const showPatients = async (page) => {
 
-    // console.log(page);
-
     // para validar codigos diferentes a 200
     // page = 100;
     
@@ -695,8 +545,6 @@ const showPatients = async (page) => {
     tableBody.innerHTML = '';
 
     const patients = await fetchPetition(`/patients?page=${page}`, 'GET', {});
-    // const appointments = response.results;
-    // const totalPages = response.totalPages;
 
     if (patients.code !== 200) {
 
@@ -722,26 +570,17 @@ const showPatients = async (page) => {
         const cell3 = row.insertCell(2);
         const cell4 = row.insertCell(3);
         const cell5 = row.insertCell(4);
-        // const cell6 = row.insertCell(5);        
 
         cell1.textContent = item._id;
         cell2.textContent = item.name;
-        // cell3.innerHTML = `<span id="state-${item._id}"  class="material-icons">${icons[item.state]}</span>`;
         cell3.textContent = item.dni || 'No disponible';
         cell4.textContent = item.phone;
         cell4.setAttribute('id', `phone-${item._id}`);
-        
-        // cell3.classList.add('icon-cell');
-        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
 
-        // cell4.textContent = item.hour;
         cell5.innerHTML = ` <button type="button" class="btn btn-primary" id="${item._id}" onclick="selectedPatientDetails(this.id)">
                                 Detalles
                             </button>`;
                             
-        // cell6.innerHTML = `<a id="${item._id}" href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#MyModal"> 
-        //     <span class="material-icons">info</span></a>`;
-
     }
 
     // Actualizar elementos de paginación
@@ -813,8 +652,6 @@ const selectedPatientDetails = async (id) => {
 // patients modal
 const showPatientsModal = async (page) => {
 
-    // console.log(page);
-
     // para validar codigos diferentes a 200
     // page = 100;
     
@@ -831,8 +668,6 @@ const showPatientsModal = async (page) => {
     tableBody.innerHTML = '';
 
     const patients = await fetchPetition(`/patients?page=${page}`, 'GET', {});
-    // const appointments = response.results;
-    // const totalPages = response.totalPages;
 
     if (patients.code !== 200) {
 
@@ -858,25 +693,17 @@ const showPatientsModal = async (page) => {
         const cell3 = row.insertCell(2);
         const cell4 = row.insertCell(3);
         const cell5 = row.insertCell(4);
-        // const cell6 = row.insertCell(5);        
 
         cell1.textContent = item._id;
         cell2.textContent = item.name;
-        // cell3.innerHTML = `<span id="state-${item._id}"  class="material-icons">${icons[item.state]}</span>`;
         cell3.textContent = item.email || 'No disponible';
         cell4.textContent = item.phone;
         cell4.setAttribute('id', `phone-${item._id}`);
         
-        // cell3.classList.add('icon-cell');
-        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
-
-        // cell4.textContent = item.hour;
         cell5.innerHTML = `<button id="${item._id}" type="button" class="btn btn-primary" data-dismiss="modal" id="seleccion" onclick="selectedPatient(this.id)">
                                 Seleccionar
                            </button>`;
-        // cell6.innerHTML = `<a id="${item._id}" href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#MyModal"> 
-        //     <span class="material-icons">info</span></a>`;
-
+      
     }
 
     // Actualizar elementos de paginación
@@ -949,14 +776,9 @@ const selectedPatient = async (id) => {
 
 const searchPatient = async (text) => {
 
-    // alert(text);
-
-    // alert(text);
-
    if (text === '')
         return;
 
-    // const patient = await fetchPetition(`/patients/${text}`, 'GET', {});
     const modalCode = document.getElementById('code');
     const modalMessage = document.getElementById('message');
 
@@ -1037,14 +859,10 @@ const searchPatient = async (text) => {
 
 const searchPatientModal = async (text) => {
 
-    alert(text);
-
-    // alert(text);
 
    if (text === '')
         return;
 
-    // const patient = await fetchPetition(`/patients/${text}`, 'GET', {});
     const modalCode = document.getElementById('code');
     const modalMessage = document.getElementById('message');
 
@@ -1217,7 +1035,7 @@ const newPatient = async () => {
             let field = '';
         
             newPatient.results.forEach(result => {
-                // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+
                 field = formattingWords(result.property);
                 
                 Object.entries(result.errors).forEach(value => {
@@ -1257,7 +1075,6 @@ const newPatient = async () => {
         return;
         
     }
-    console.log('?')
     
     // mostrar confirmación
     $('#modal').modal('show');
@@ -1275,8 +1092,6 @@ const newPatient = async () => {
 };
 
 const showDetailsPatient = async () => {
-
-    console.log('?');
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -1324,9 +1139,6 @@ const showDetailsPatient = async () => {
 
         for (const item of patient.results.medical_record) {
 
-            console.log(item);
-
-            //<li class="list-group-item">Item 1</li>
             const li = document.createElement('li');
 
             li.classList.add('list-group-item');
@@ -1371,8 +1183,6 @@ const showAppointmentsUser = async (page) => {
 
     const appointments = await fetchPetition(`/appointments/patient/${id}`, 'GET', {});
 
-    console.log(appointments)
-
     if (appointments.code !== 200) {
 
         appointmentsRecord.innerHTML = '<li class="list-group-item">No hay registros</li>';
@@ -1392,14 +1202,7 @@ const showAppointmentsUser = async (page) => {
         cell1.innerHTML = `  <td><button id="${item._id}" class="btn btn-link" disabled>
                                 <img src="/img/carpet.png"  alt="" width="13" height="13">
                             </button></td>`;
-        // cell1.textContent = item._id;
         cell2.textContent = item._id;
-        // cell3.textContent = item.department.name;
-        // cell3.setAttribute('data-filter', 'departamento');
-        
-        // cell3.classList.add('icon-cell');
-        // cell3.innerHTML = `<span id class="material-icons">${icons[item.state]}</span>`;
-
         cell3.textContent = item.date.split('T')[0].split('-').reverse().join('/');
 
     }
@@ -1459,7 +1262,6 @@ const showAppointmentsUser = async (page) => {
 
 };
 
-// const updateAppointment = async (id, initialDepartament, initialHour , initialDate, initialReason) => {
 const updateAppointment = async (id) => {
 
     let department = document.getElementById('departamento-edit').value;
@@ -1470,17 +1272,6 @@ const updateAppointment = async (id) => {
 
     const modalCode = document.getElementById('code');
     const modalMessage = document.getElementById('message');
-
-    console.log('id', id);
-    // console.log('department', department, '\nold', initialDepartment);
-    // console.log('hour', hourNew, '\nold', initialHour);
-    // // console.log('date', dateNew, '\nold', initialDate);
-    // console.log('reason', reason, '\nold', initialReason);
-
-    console.log('hour', hourNew);
-    console.log('date', dateNew);
-    console.log('department', department);
-    console.log('reason', reason);
     
     if (department === '' || hourNew === '' || dateNew === '' || reason === '') {
 
@@ -1508,9 +1299,6 @@ const updateAppointment = async (id) => {
 
     }
 
-    // if (dataOld.results.date === )
-    console.log(dataOld.results.date.split('T')[0] === dateNew);
-
     if (dataOld.results.date.split('T')[0] === dateNew)
         dateNew = undefined;
 
@@ -1525,11 +1313,6 @@ const updateAppointment = async (id) => {
 
     if (state !== 'Pendiente')
         state = 'Pendiente';
-
-    console.log('hour', hourNew);
-    console.log('date', dateNew);
-    console.log('department', department);
-    console.log('reason', reason);
 
     if (dateNew === undefined && hourNew === undefined && department === undefined && reason === undefined) {
         
@@ -1599,41 +1382,33 @@ const newUser = async () => {
 
     }
 
-    // if (phone !== '') {
+    const phonePattern = /^[0-9]{1,8}$/i;
 
-        const phonePattern = /^[0-9]{1,8}$/i;
+    if (!phonePattern.test(phone)) {
 
-        if (!phonePattern.test(phone)) {
+        $('#modal').modal('show');
 
-            $('#modal').modal('show');
+        modalCode.textContent = 'Teléfono inválido';
+        modalMessage.textContent = 'Por favor, ingrese un número de teléfono válido, por ejemplo: 98765432';
 
-            modalCode.textContent = 'Teléfono inválido';
-            modalMessage.textContent = 'Por favor, ingrese un número de teléfono válido, por ejemplo: 98765432';
+        return;
 
-            return;
+    }
 
-        }
+    phone = parseInt(phone);
 
-        phone = parseInt(phone);
+    const emailPattern = /^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/i;
 
-    // }
+    if (!emailPattern.test(email)) {
 
-    // if (email !== '') {
+        $('#modal').modal('show');
 
-        const emailPattern = /^[\w+\.]+@(\w+)\.+([\w-]{2,4})$/i;
+        modalCode.textContent = 'Correo inválido';
+        modalMessage.textContent = 'Por favor, ingrese un correo válido por ejemplo: example@example.com';
 
-        if (!emailPattern.test(email)) {
+        return;
 
-            $('#modal').modal('show');
-
-            modalCode.textContent = 'Correo inválido';
-            modalMessage.textContent = 'Por favor, ingrese un correo válido por ejemplo: example@example.com';
-
-            return;
-
-        }
-
-    // }
+    }
 
     if (password !== confirm_password) {
 
@@ -1658,7 +1433,7 @@ const newUser = async () => {
             let field = '';
         
             newPatient.results.forEach(result => {
-                // errorMessage += `<strong>Campo: ${result.property}</strong><br>Errores:<br>`;
+
                 field = formattingWords(result.property);
                 
                 Object.entries(result.errors).forEach(value => {
@@ -1698,7 +1473,6 @@ const newUser = async () => {
         return;
         
     }
-    console.log('?')
     
     // mostrar confirmación
     $('#modal').modal('show');
@@ -1794,8 +1568,6 @@ const isPhone = (phone) => {
 };
 
 const insertDataTableModalPatients = (id, items) => {
-
-    console.log('items', items);
     
     // eliminar paginacion
     const paginationList = document.querySelector('.pagination');
@@ -1830,8 +1602,6 @@ const insertDataTableModalPatients = (id, items) => {
 };
 
 const insertDataTablePatients = (id, items) => {
-
-    console.log('items', items);
     
     // eliminar paginacion
     const paginationList = document.querySelector('.pagination');
@@ -1888,8 +1658,6 @@ const convertDateToDDMMYYYY = (date) => {
     const year = date.getUTCFullYear();
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
     const day = date.getUTCDate().toString().padStart(2, '0');
-
-    // console.log(`${day}/${month}/${year}`);
 
     return `${day}/${month}/${year}`;
 
