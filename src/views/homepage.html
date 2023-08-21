@@ -21,7 +21,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light ">
+<nav class="navbar navbar-expand-lg sticky-top">
     <a class="navbar-brand" href="#">
         <img
                 src="\img\logo.png"
@@ -56,7 +56,7 @@
                 <a
                         class="nav-link dropdown-toggle"
                         href="#"
-                        id="userDropdown"
+                        id="userDropdown2"
                         role="button"
                         data-toggle="dropdown"
                         aria-haspopup="true"
@@ -71,7 +71,7 @@
                 </a>
                 <div
                         class="dropdown-menu dropdown-menu-right custom-dropdown"
-                        aria-labelledby="userDropdown"
+                        aria-labelledby="userDropdown2"
                 >
                     <a class="dropdown-item" href="#">Iniciar Sesión</a>
                 </div>
@@ -228,17 +228,7 @@
         .catch((error) => console.error("Error al cargar el Navbar:", error));
 </script>
 
-<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-<script
-        src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"
-></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
