@@ -95,7 +95,7 @@
                   href="#"
                   class="btn btn-light btn-block"
                   data-toggle="modal"
-                  data-target="#miModal"
+                  data-target="#modalEditar"
                 >
                   <span class="material-icons"> edit </span>
                 </a>
@@ -137,7 +137,7 @@
 
     <div
       class="modal fade"
-      id="MyModal"
+      id="modalEditar"
       tabindex="-1"
       role="dialog"
       aria-labelledby="modalLabel"
@@ -146,7 +146,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="MyModalLabel">Detalles</h5>
+            <h5 class="modal-title" id="modalEditarLabel">Editar Cita</h5>
             <button
               type="button"
               class="close"
@@ -161,7 +161,7 @@
               <!-- Primera columna -->
               <div class="col-md-6">
                 <!-- Campo Nombre -->
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                   <label for="nombre" class="form-label">
                     Nombre del Paciente</label
                   >
@@ -174,55 +174,40 @@
                     disabled
                   />
                 </div>
-                <!-- Campo Departamento -->
-                <div class="mb-3">
-                  <label for="departamento" class="form-label">
-                    Departamento</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="departamento"
-                    name="departamento"
-                    value="Ortodoncia"
-                    disabled
-                  />
-                </div>
               </div>
               <!-- Segunda columna -->
               <div class="col-md-6">
-                <!-- Campo Estado-->
-                <div class="mb-3">
-                  <label for="estado" class="form-label"> Estado</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="estado"
-                    name="estado"
-                    value="Confirmado"
-                    disabled
-                  />
+                <!-- Campo Departamento -->
+                <div class="row mt-3">
+                  <div class="col form-group mb-3">
+                    <label for="departamento">Departamento:</label>
+                    <select class="form-control" id="departamento">
+                      <option value="ortodoncia">Ortodoncia</option>
+                      <option value="endodoncia">Endodoncia</option>
+                      <option value="odontologia">Odontología General</option>
+                    </select>
+                  </div>
                 </div>
-                <!-- Campo Fecha y Hora -->
+              </div>
 
+              <!-- Campo Fecha y Hora -->
+
+              <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="fechahora" class="form-label">Fecha y Hora</label>
+                  <label for="hora">Hora:</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id="fecha"
-                    name="fecha"
-                    value="12/79"
-                    disabled
-                  />
-                  <input
-                    type="text"
+                    type="time"
                     class="form-control"
                     id="hora"
-                    name="hora"
-                    value="10:00"
-                    disabled
+                    placeholder="hh:mm AM/PM"
                   />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="fecha">Fecha:</label>
+                  <input type="date" class="form-control" id="fecha" />
                 </div>
               </div>
             </div>
@@ -234,7 +219,6 @@
                   class="form-control"
                   id="motivo"
                   value="Colocacion de Brackets"
-                  disabled
                 />
               </div>
             </div>
@@ -332,7 +316,7 @@
                   />
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control mt-3"
                     id="hora"
                     name="hora"
                     value="10:00"
